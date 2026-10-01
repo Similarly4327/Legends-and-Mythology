@@ -1,0 +1,11 @@
+.main { max-width: 830px; margin: auto; padding: 15px 40px 90px; }
+.main header { padding: 50px 0 45px; }
+.main h1 { font-size: clamp(54px, 6vw, 78px); line-height: .99; margin: 25px 0 30px; letter-spacing: -1px; }
+.main h1 em { font-weight: 400; color: var(--accent); }
+.main header p { font-family: var(--font-display); font-size: 27px; line-height: 1.5; }
+.main section { border-top: 1px solid var(--line); padding: 32px 0; }
+.main h2 { font-size: 36px; margin-bottom: 17px; }
+.main section p { font-size: 14px; color: var(--muted); }
+.main section p + p { margin-top: 14px; }
+.main > a:last-child { margin-top: 25px; }
+@media (max-width: 650px) { .main { padding: 8px 26px 60px; } .main header { padding: 34px 0; } .main h1 { font-size: 54px; overflow-wrap: anywhere; } .main header p { font-size: 25px; } .main h2 { font-size: 31px; } }

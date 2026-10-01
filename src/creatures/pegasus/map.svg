@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="740" viewBox="0 0 1000 740">
+<defs><pattern id="sea" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M3 17q7-4 14 0t14 0" stroke="#7c8c88" fill="none" opacity=".15"/></pattern><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".5" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".045"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter></defs>
+<g filter="url(#grain)"><rect width="1000" height="740" fill="#cfdbd5"/><rect width="1000" height="740" fill="url(#sea)"/>
+<g fill="#e9cf9d" stroke="#8d6a40" stroke-width="2" stroke-linejoin="round">
+<path d="M0 0H675l-5 73-57 21-30-22-49 43-40-7-44 42-7 41 36 28-13 37-30 7-3 36 25 19-7 36-32 18 2 38 39 24 20 35-14 27-56-19-46-7-16-30-33-7-16-36-26-6-3-44-24-29 6-36-32-40-18-20-43 11-30-25-40 10-51-31H0Z"/>
+<path d="m330 446 42-9 29 10 25 34 39-5 31 29-11 29-22 1 1 38 25 29-10 37-23-9-27-48-24-1-11 33-25-14-4-47-29-30-6-30-17-29Z"/>
+<path d="m486 309 18 13 17 37 23 20 1 30-19-7-15-29-24-30Z"/>
+<path d="m643 597 20-5 31 16 7 27-18 14-24-17Z"/>
+<path d="m487 661 47 2 48-13 40 10 48-5 25 17-14 20-50-2-36 9-48-13-45 1Z"/>
+<path d="M1000 0H803l-18 101 27 46-22 61-32 26 18 47-45 40 27 27-26 36 15 52 33 22-18 21 24 37-41 18-10 35 64 13 21 42 36-11 33 35 37-21 22 36 57 4Z"/>
+<path d="m654 240 16-9 24 22-8 29-18-9Z"/><path d="m700 361 19 11-7 35-18-10Z"/><path d="m571 464 16 9-5 14-19-7Z"/><path d="m611 482 11-12 16 11-8 19Z"/><path d="m643 440 10 8-5 18-12-7Z"/><path d="m685 501 11-11 18 10-6 17Z"/><path d="m757 560 26 10 4 24-21-2Z"/>
+</g>
+<g fill="none" stroke="#92734e" opacity=".5"><path d="m318 184 13-19 15 24m-7-7 18-25 16 28m-58 87 17-24 15 23m31 105 15-23 20 23m-36 17 13-19 15 22m-25 87 15-21 17 25"/><path d="M25 25h950v690H25Z M32 32h936v676H32Z"/><path d="M25 60h25V25m925 35h-25V25M25 680h25v35m925-35h-25v35"/></g>
+<g font-family="Georgia, serif" fill="#654a2e"><text x="306" y="314" font-size="24" letter-spacing="5" transform="rotate(-25 306 314)">GRIEKENLAND</text><text x="609" y="368" font-size="19" font-style="italic" letter-spacing="2">Egeïsche</text><text x="636" y="397" font-size="19" font-style="italic" letter-spacing="2">Zee</text><text x="825" y="312" font-size="17" letter-spacing="3" transform="rotate(80 825 312)">KLEIN-AZIË</text><text x="555" y="720" font-size="16" letter-spacing="4">KRETA</text><text x="436" y="477" font-size="14">Helikon</text></g>
+<g transform="translate(431 459)" stroke="#78512d"><circle r="8" fill="#78512d"/><circle r="17" fill="none" stroke-dasharray="2 4"/></g>
+<g transform="translate(880 100)" fill="none" stroke="#78512d"><circle r="35" stroke-width=".7"/><circle r="28" stroke-width=".7"/><path d="M0-40 6-6 40 0 6 6 0 40-6 6-40 0-6-6Z"/><path d="M0-40V0l6-6ZM40 0H0l6 6ZM0 40V0l-6 6ZM-40 0H0l-6-6Z" fill="#78512d"/><path d="m-22-22 22 16 22-16-16 22 16 22-22-16-22 16 16-22Z" stroke-width=".7"/><text y="-42" text-anchor="middle" font-size="15" fill="#78512d" stroke="none" font-family="Georgia">N</text></g>
+<text x="65" y="683" font-family="Georgia" font-style="italic" font-size="14" fill="#785f43">Een kaart uit het onderzoeksboek · gestileerd, niet op schaal</text></g></svg>
+

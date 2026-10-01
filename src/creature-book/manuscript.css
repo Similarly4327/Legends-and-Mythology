@@ -1,0 +1,93 @@
+/* Visual direction: the antique bestiary plates in guideline page/. */
+@scope (.creature-experience) {
+  :scope { --paper: #edd8af; --ink: #49321f; --muted: #795d3f; --accent: #79502b; --line: #b18d5b66; }
+  .theme-wonder { --paper: #edd8af; --ink: #49321f; --muted: #795d3f; --accent: #79502b; --line: #b18d5b66; }
+  .theme-adventure { --paper: #e6c995; --ink: #513421; --accent: #8a542b; --line: #98774766; }
+  .book-shell {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23794e25' opacity='.075' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"), radial-gradient(ellipse at 50% 30%, #fff2d580, transparent 65%), linear-gradient(90deg, #bb8a4130, transparent 8%, transparent 92%, #bb8a4130);
+  }
+  .site-header { border-bottom: 3px double var(--line); }
+  .brand>span { letter-spacing: .2px; }
+  .chapter-nav { border-bottom: 3px double var(--line); }
+  .chapter-nav a { font-family: var(--serif); font-size: 17px; }
+  .chapter-nav .selected:after { height: 3px; background: var(--accent); }
+  main { position: relative; margin: 16px 3% 0; border: 1px solid var(--line); outline: 3px double var(--line); outline-offset: 5px; }
+  main:before, main:after { content: '✥'; position: absolute; top: -14px; font-family: Georgia, serif; font-size: 23px; color: var(--accent); z-index: 3; pointer-events: none; background: var(--paper); line-height: 1; }
+  main:before { left: -11px; } main:after { right: -11px; }
+  .introduction { padding: 36px 3% 0; grid-template-columns: 36% 64%; min-height: calc(100svh - 320px); }
+  .intro-copy { padding: 20px 0 32px 5%; }
+  .intro-copy h1 { font-size: clamp(72px, 7.3vw, 108px); font-variant: small-caps; letter-spacing: 2px; line-height: 1; padding: 10px 0; margin: 15px 0 8px; border-block: 3px double var(--line); }
+  .intro-subtitle { font-size: 25px; }
+  .intro-description { font-family: var(--serif); font-size: 18px; line-height: 1.55; }
+  .intro-lead { font-size: 25px; line-height: 1.4; }
+  .manuscript-ornament { display: block; width: 190px; height: 24px; color: var(--accent); margin: 18px 0; opacity: .75; }
+  .manuscript-compass { position: absolute; left: 3%; bottom: 8%; width: 72px; height: 72px; color: var(--accent); opacity: .6; pointer-events: none; }
+  .intro-art { padding-bottom: 23px; }
+  .intro-art img { mask-image: linear-gradient(transparent, black 9%, black 88%, transparent), linear-gradient(90deg, transparent, black 9%, black 90%, transparent); mask-composite: intersect; }
+  .intro-art figcaption { font-size: 18px; }
+  .art-number { top: 6%; right: 5%; font-family: var(--serif); font-size: 12px; }
+  .primary-button { background: transparent; color: var(--ink); border: 3px double var(--accent); padding: 13px 21px; font-family: var(--serif); font-size: 19px; box-shadow: 2px 2px 0 #79502b18; }
+  .primary-button:hover { background: #79502b12; filter: none; }
+  .intro-bottom { border-top: 3px double var(--line); font-family: var(--serif); font-style: italic; font-size: 14px; }
+  .discovery { padding: 25px 4% 0; }
+  .discovery-visual { padding-right: 6%; }
+  .section-heading { text-align: center; }
+  .section-heading h1 { font-size: 43px; margin: 11px 0 0; padding: 8px 12px; border: 3px double var(--line); }
+  .section-heading .manuscript-ornament { margin: 9px auto; width: 150px; height: 18px; }
+  .anatomy .illustration-frame img { mask-image: linear-gradient(transparent, black 9%, black 88%, transparent), linear-gradient(90deg, transparent, black 9%, black 90%, transparent); mask-composite: intersect; }
+  .illustration-frame .manuscript-compass { bottom: 3%; left: 2%; width: 58px; height: 58px; }
+  .visual-caption { font-family: var(--serif); font-style: italic; font-size: 17px; border-top: 3px double var(--line); padding-top: 12px; }
+  .visual-caption .folio { font: 10px 'DM Sans', sans-serif; font-style: normal; }
+  .focus-marker { gap: 0; }
+  .focus-marker>span { width: 13px; height: 13px; background: #edd8af60; box-shadow: none; }
+  .focus-marker>span:after { content: ''; display: block; position: absolute; width: 28px; height: 1px; background: var(--accent); left: 13px; top: 6px; transform: rotate(-18deg); transform-origin: left; }
+  .focus-marker small { margin-left: 24px; border: 0; border-bottom: 1px solid var(--line); background: #edd8afe6; font-family: var(--serif); font-style: italic; font-size: 18px; padding: 2px 5px; transform: translateY(-7px); }
+  .focus-marker[data-edge="right"] { flex-direction: row-reverse; transform: translateX(calc(-100% + 13px)); }
+  .focus-marker[data-edge="right"] small { margin-left: 0; margin-right: 24px; }
+  .focus-marker[data-edge="right"]>span:after { left: auto; right: 13px; transform-origin: right; transform: rotate(18deg); }
+  .discovery-step { padding-left: 28px; }
+  .discovery-step h2 { font-style: italic; font-size: 38px; }
+  .discovery-step p { font-family: var(--serif); font-size: 22px; line-height: 1.6; color: var(--ink); }
+  .discovery-step .eyebrow:before { content: '✧'; margin-right: 10px; font-size: 17px; }
+  .step-dots button:after { height: 1px; }
+  .step-dots button.active:after { height: 3px; }
+  .reading-mode main { margin: 10px 3% 0; }
+  .reading-mode .story-reader { margin: 0; border: 0; height: calc(100svh - 166px); }
+  .story-art { border: 5px double #81592f; }
+  .story-art-label { font-family: var(--serif); font-size: 21px; letter-spacing: .7px; background: #edd8afe8; border: 3px double #79502b99; padding: 10px 18px; }
+  .story-reading { background: transparent; border-top: 3px double var(--line); scrollbar-color: #977347 transparent; }
+  .story-reading-inner { max-width: 860px; }
+  .story-reading h1 { border-bottom: 3px double var(--line); padding-bottom: 12px; }
+  .story-reading h1+p:first-letter { float: left; font-family: var(--serif); font-size: 65px; line-height: .8; padding: 9px 7px 0 0; color: var(--accent); }
+  .folklore-page { grid-template-columns: 42% 53%; padding: 45px 6%; }
+  .folklore-heading h1 { font-size: 53px; border-block: 3px double var(--line); padding: 15px 0; }
+  .folklore-heading p { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.5; max-width: 350px; margin-bottom: 10px; }
+  .folklore-sketch img { mix-blend-mode: multiply; mask-image: radial-gradient(ellipse 65% 65% at center, black 50%, transparent 97%); }
+  .folklore-sketch figcaption { text-align: center; color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 16px; }
+  .folklore-notes { padding: 0; }
+  .folklore-notes p { font-family: var(--serif); font-size: 21px; line-height: 1.6; color: var(--ink); }
+  .folklore-notes article:first-child p:first-letter { float: left; font-size: 60px; line-height: .85; padding: 7px 6px 0 0; }
+  .folklore-notes blockquote { border-block: 3px double var(--line); padding: 20px 0; }
+  .contents-dialog { background: var(--paper); border: 5px double var(--accent); }
+  @media (max-width: 1050px) { .introduction { grid-template-columns: 43% 57%; } .intro-copy h1 { font-size: 72px; } .intro-lead { font-size: 23px; } .discovery-step p { font-size: 21px; } .section-heading h1 { font-size: 35px; } }
+  @media (max-width: 759px) {
+    main { margin: 14px 4% 0; } main:before, main:after { font-size: 20px; top: -11px; }
+    .chapter-nav a { font-size: 11.5px; gap: 3px; padding-left: 3px; padding-right: 3px; } .chapter-nav svg { width: 10px; }
+    .introduction { padding: 12px 5% 0; } .intro-copy h1 { font-size: 69px; margin: 12px 0 7px; padding: 7px 0; }
+    .intro-subtitle { font-size: 23px; } .intro-copy>.manuscript-ornament { order: 5; margin: 8px auto; }
+    .intro-art { margin: 10px -6% 0; } .intro-art img { max-height: 230px; } .intro-art figcaption { font-size: 16px; } .intro-art .manuscript-compass { width: 42px; height: 42px; }
+    .intro-lead { font-size: 23px; } .intro-description { font-size: 18px; margin: 13px 0 18px; }
+    .primary-button { font-size: 18px; } .intro-bottom { font-size: 12px; } .intro-bottom a { font-size: 12px; }
+    .discovery { padding: 10px 5% 0; } .discovery-visual { padding: 12px 0 9px; height: 42svh; min-height: 270px; background: var(--paper); }
+    .section-heading h1 { font-size: 27px; padding: 5px 8px; margin: 6px 0 0; } .section-heading .manuscript-ornament { height: 12px; margin: 5px auto; }
+    .illustration-frame img { max-height: 24svh; } .illustration-frame .manuscript-compass { width: 35px; height: 35px; }
+    .visual-caption { font-size: 14px; padding-top: 6px; } .focus-marker small { font-size: 14px; margin-left: 9px; } .focus-marker>span:after { width: 12px; left: 10px; top: 5px; }
+    .focus-marker[data-edge="right"] small { margin-right: 9px; } .focus-marker[data-edge="right"]>span:after { left: auto; right: 10px; }
+    .discovery-step { padding: 35px 5%; } .discovery-step h2 { font-size: 34px; } .discovery-step p { font-size: 22px; }
+    .chapter-turn .primary-button { font-size: 16px; }
+    .reading-mode main { margin: 8px 3% 0; } .reading-mode .story-reader { height: calc(100svh - 145px); }
+    .story-art-label { font-size: 17px; padding: 7px 10px; left: 12px; top: 12px; letter-spacing: .2px; }
+    .story-reading-inner { padding: 20px 7% 35px; }
+    .folklore-page { padding: 30px 7%; } .folklore-heading h1 { font-size: 43px; } .folklore-sketch { max-width: 330px; margin: auto; } .folklore-notes p { font-size: 21px; }
+  }
+}

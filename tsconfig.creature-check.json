@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": { "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.creature-check.tsbuildinfo" },
+  "include": ["src/creature-book", "src/creatures", "src/lib/markdown.ts"]
+}
