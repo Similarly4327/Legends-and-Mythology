@@ -5,7 +5,7 @@ import { pegasus } from '../src/content/creatures/pegasus';
 import { draak } from '../src/content/creatures/draak';
 import { kuchisakeOnna } from '../src/content/creatures/kuchisake-onna';
 
-test('all three demonstration entries pass content validation', () => {
+test('all registered entries pass content validation', () => {
   assert.deepEqual(validateCreatures(creatures), []);
   assert.equal(new Set(creatures.map((creature) => creature.category)).size, 3);
 });
@@ -60,8 +60,12 @@ test('validation catches empty published chapters, missing map context and unsaf
   assert.ok(errors.some((error) => error.includes('invalid annotation position')));
 });
 
-test('reading order has stable boundaries and can cross books', () => {
+test('reading order has stable boundaries within each book', () => {
   assert.equal(getCreatureNeighbors('pegasus').previous, undefined);
-  assert.equal(getCreatureNeighbors('pegasus').next?.slug, 'draak');
-  assert.equal(getCreatureNeighbors('kuchisake-onna').next, undefined);
+  assert.equal(getCreatureNeighbors('pegasus').next?.slug, 'fenix');
+  assert.equal(getCreatureNeighbors('baku').next, undefined);
+  assert.equal(getCreatureNeighbors('draak').previous, undefined);
+  assert.equal(getCreatureNeighbors('manticore').next, undefined);
+  assert.equal(getCreatureNeighbors('kuchisake-onna').previous, undefined);
+  assert.equal(getCreatureNeighbors('baba-yaga').next, undefined);
 });

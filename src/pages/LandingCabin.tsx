@@ -9,9 +9,11 @@ import { Artwork } from '../components/Artwork';
 import { Icon } from '../components/Icon';
 import { usePageTitle } from '../hooks/usePageTitle';
 import common from '../components/Common.module.css';
+import { useBookMotion } from '../hooks/useBookMotion';
 import styles from './LandingCabin.module.css';
 
 export function LandingCabin() {
+  const move = useBookMotion();
   usePageTitle('De studeerkamer');
   return <div className={common.paperPage}>
     <div className={styles.cabin}>
@@ -41,7 +43,7 @@ export function LandingCabin() {
         <Link className={common.textLink} to="/over">Een kijkje in het veldnotitieboek <Icon name="arrow-right" /></Link>
         <div className={styles.features}><span><Icon name="book" /> Om samen te lezen</span><span><Icon name="map" /> Verhalen van de wereld</span></div>
       </div>
-      <Link to="/wezens/pegasus" className={styles.preview} aria-label="Ontmoet Pegasus, een verhaal uit het lichte boek">
+      <Link to="/boeken/wonder" onClick={event => { event.preventDefault(); move('wonder', 'opening'); }} className={styles.preview} aria-label="Ontmoet Pegasus, een verhaal uit het lichte boek">
         <div className={styles.previewArt}><Artwork artwork={pegasus.artwork} /><span className={styles.plateNumber}>PLAAT I</span></div>
         <div className={styles.previewCaption}><span><small>UIT HET LICHTE BOEK</small><strong>Een eerste ontmoeting: Pegasus</strong></span><Icon name="arrow-right" /></div>
       </Link>

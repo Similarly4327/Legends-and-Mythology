@@ -1,31 +1,41 @@
-# Pegasus en de bron op de berg
+# Pegasus en het lied dat zoek was
 
-Lang geleden, toen de bergen van Griekenland nog vol verhalen zaten, leefde er een paard dat kon vliegen. Zijn naam was Pegasus. Zijn vacht was wit als de eerste wolk van de ochtend en zijn vleugels waren zo groot dat ze een schaduw over een hele weide konden leggen.
+## Een lege plaats in het lied
 
-Iedere dag vloog hij langs de bergtoppen. Hij zag de zee glinsteren, de olijfbomen wiegen en kleine paden verdwijnen tussen de rotsen. Maar op een ochtend hoorde hij iets wat hij nog nooit had gehoord: een berg die zong.
+Eleni kende het pad naar de berg beter dan de straten van het dorp. Bij de derde olijfboom moest je links, langs een steen die op een slapende hond leek. Daar begon het steile stuk. Haar vader zei altijd dat zij sneller boven was dan een geit. Vandaag liep ze langzaam. In haar tas lag een lier met een gebroken snaar, en in haar hoofd zat een lied zonder einde.
 
-## De zingende berg
+Over drie dagen zou haar grootmoeder vertrekken naar het dorp aan de andere kant van de zee. Eleni wilde haar een lied meegeven. Een lied over hun huis, de tuin en de manier waarop grootmoeder een appel in één lange schil kon veranderen. Maar iedere keer dat Eleni bij het afscheid kwam, hield het lied op. Ze kon geen woord vinden dat klein genoeg was voor de melodie en groot genoeg voor wat ze voelde.
 
-Pegasus landde op Helikon. Tussen de bomen zaten de Muzen. Ze zongen over verre reizen, over sterren en over woorden die je hart een beetje groter maken.
+Op Helikon, had grootmoeder verteld, lag een bron die bij de Muzen hoorde. Wie goed luisterde, kon er misschien een begin vinden. Eleni had juist een einde nodig, maar het was de enige aanwijzing die ze bezat. Daarom klom ze verder. De zon verwarmde haar schouders. Een vogel riep drie tonen, wachtte even en riep dezelfde drie tonen opnieuw.
 
-Het gevleugelde paard luisterde. Zelfs de wind leek stil te worden. Een kleine vogel streek neer op een tak en vergat heel even zijn eigen lied.
+Bij de volgende bocht lag een witte veer. Niet zomaar een veer: hij was langer dan Eleni’s onderarm. Ze raapte hem niet op. Grootmoeder had haar geleerd dat je een onbekend dier eerst ruimte moest geven. Een tweede veer lag tussen twee stenen. Boven haar streek een schaduw over het pad, breed als het zeil van een vissersboot.
 
-Toen keek Pegasus naar de droge stenen aan zijn voeten. De berg was mooi, maar de aarde had dorst. Er was nergens water te zien.
+## Het paard boven de bron
 
-## Een hoefslag op de rots
+Eleni keek omhoog. Op de rotsrand stond een paard. Zijn hoeven rustten stevig op de steen, maar uit zijn rug groeiden twee gevederde vleugels. Een vleugel was nog half geopend. De veren bewogen afzonderlijk in de wind, alsof iedere veer wist welk stukje lucht zij moest vasthouden.
 
-Voorzichtig hief Pegasus één hoef op. Hij tikte op de rots. Niet hard, niet boos — gewoon een heldere tik, alsof hij op een deur klopte.
+Het paard draaide zijn kop. Eleni wilde iets verstandigs zeggen. Ze zei: “Goedemorgen,” hoewel het bijna middag was. Het paard blies door zijn neus. Een plukje stof schoof over de rots. Dat leek op een antwoord, en dat was voorlopig genoeg.
 
-Er klonk een zacht gerommel. Een dun straaltje water vond zijn weg tussen de stenen. Het straaltje werd een stroompje, en het stroompje werd een bron. Het water schitterde alsof iemand een handvol sterren op de berg had achtergelaten.
+“Ben jij Pegasus?” vroeg ze. Hij kwam niet dichterbij. In plaats daarvan keek hij naar het water onder de rots. Eleni hoorde nu het zachte klateren van Hippokrene. Zij ging op een platte steen zitten en legde haar tas naast zich neer. De bron liep over een randje, maakte een bocht en verdween tussen het gras.
 
-De Muzen kwamen dichterbij. Ze noemden de bron **Hippokrene**, de paardenbron. En terwijl het water verder stroomde, begon hun lied opnieuw.
+Ze probeerde haar lied. Het begin lukte. Het huis, de tuin, de appelschil: alles vond een plek. Toen kwam het afscheid. Haar stem werd dun. Ze drukte op de gebroken snaar, hoewel die geen klank meer kon geven. Pegasus vouwde zijn vleugel dicht. Eleni voelde zich opeens heel klein.
 
-## Iets om mee te nemen
+“Het is nog niet af,” zei ze haastig. “Dat hoor je natuurlijk.” Ze stopte de lier in haar tas. Misschien moest ze teruggaan en grootmoeder gewoon een appel geven. Misschien waren liederen voor mensen die precies wisten wat zij wilden zeggen.
 
-Vanaf die dag kwamen mensen naar de bron. Dichters gingen op de stenen zitten. Ze luisterden naar het water, naar de bomen, naar de stilte tussen twee gedachten. Soms vonden ze precies daar de eerste woorden van een nieuw verhaal.
+## Een geluid dat niemand bestelde
 
-Pegasus bleef niet. Hij spreidde zijn vleugels en steeg op. Maar toen hij nog één keer omkeek, zag hij hoe het water glinsterde en hoe een kind aan de rand van de bron zat te dromen.
+Pegasus zette één hoef naast het water. Niet met de geweldige slag die Eleni zich bij een mythe had voorgesteld. Gewoon een zachte tik. Het water spatste tegen een losse steen. Tik, klater, stilte. De vogel boven haar zong weer zijn drie tonen.
 
-Misschien, dacht hij, hoef je niet altijd zelf te vliegen om ergens ver weg te komen.
+Eleni luisterde. De bron speelde geen voltooid lied. De vogel ook niet. Toch ontbrak er niets aan hun geluid. Het water ging verder, zelfs wanneer zij het niet meer zag. Grootmoeder zou aan de andere kant van de zee ook een tuin vinden, een appel schillen en soms aan dit pad denken.
 
-En met een zachte slag van zijn vleugels verdween hij tussen de wolken.
+Ze haalde de lier weer tevoorschijn. De gebroken snaar kon zij vandaag niet herstellen, maar de andere snaren waren er nog. Ze koos een eenvoudiger melodie. Bij het afscheid zong ze niet over een deur die dichtging. Ze zong over water dat buiten het zicht verder stroomde. De laatste regel ging over een lied dat aan een andere tafel opnieuw mocht beginnen.
+
+Deze keer viel er een stilte na haar stem. Een goede stilte, waarin ze niet meteen iets hoefde te verbeteren. Pegasus stapte van de rots en spreidde zijn vleugels. De wind streek langs Eleni’s gezicht. Zij hield haar tas stevig vast en lachte toen de lange veer over het pad danste.
+
+## Een lied om mee te nemen
+
+Thuis vroeg grootmoeder of Eleni de bron had gevonden. “Ja,” zei ze. “Maar ik weet niet of de Muzen mij geholpen hebben. Misschien was het alleen het water.” Grootmoeder trok haar wenkbrauwen op. “Alleen het water kan behoorlijk veel zijn.”
+
+Drie dagen later speelde Eleni haar lied bij de haven. De lier had een nieuwe snaar, maar ze gebruikte nog steeds de eenvoudige melodie. Grootmoeder zong de laatste regel mee. Toen het schip vertrok, bleef Eleni staan totdat de mast heel klein werd.
+
+Boven de berg gleed een witte vorm door de lucht. Misschien een wolk. Misschien een paard dat geen afscheid nodig had om verder te kunnen vliegen. Eleni stak haar hand op. Daarna ging zij naar huis, waar een nieuw lied op haar wachtte.

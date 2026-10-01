@@ -1,4 +1,11 @@
 import { pegasus } from './pegasus/creature';
+import { fenix } from './fenix/creature';
+import { baku } from './baku/creature';
+import { draak } from './draak/creature';
+import { cycloop } from './cycloop/creature';
+import { manticore } from './manticore/creature';
+import { kuchisakeOnna } from './kuchisake-onna/creature';
+import { wendigo } from './wendigo/creature';
+import { babaYaga } from './baba-yaga/creature';
 import { validateCreatures } from './registry';
-
-export const creatures = validateCreatures([pegasus]);
+export const creatures = validateCreatures([pegasus, fenix, baku, draak, cycloop, manticore, kuchisakeOnna, wendigo, babaYaga]);

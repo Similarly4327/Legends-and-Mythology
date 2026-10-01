@@ -1,39 +1,29 @@
-# Legends & Mythology
+# Het creature-contract
 
-Een geïllustreerd onderzoeksboek met één herbruikbare Creature Page. React, TypeScript en Vite. Pegasus is de referentie voor het boek `wonder`.
+Alle negen wezens gebruiken de bestaande CreatureBook en StickyScroll. Iedere folder bevat creature.ts, story.md en lokale artwork-assets. Registratie staat eenmaal in src/creatures/index.ts. foundationCatalog.ts levert catalogusmetadata aan de bestaande hut en inhoudsopgave.
 
-## Starten
+## Routes en boekcontext
 
-```sh
-pnpm install
-pnpm dev
-pnpm check
-```
+/wezens/:slug en /creatures/:id zijn aliases. /creatures/:id/anatomy, /origin, /story en /folklore beginnen bij een onderdeel van het volledige document. Hoofdstukknoppen wisselen geen route. Buren blijven binnen hetzelfde boek. Sluit boek keert via een animatie terug naar de hut; daar kiest de normale UI een ander boek. Directe URLs openen hun eigen context. De eerdere creature-preview.html gebruikt nu dezelfde App.
 
-De app gebruikt een HashRouter voor statische hosting (ook op een GitHub Pages-subpad). Een directe link is bijvoorbeeld `/#/creatures/pegasus`, met hoofdstukken `/anatomy`, `/origin`, `/story` en `/folklore`. De bestaande `/wezens/pegasus`-route opent dezelfde ervaring. `pnpm build` maakt `dist/`; serveer deze map via een webserver.
+## DiscoveryStep
 
-Een zelfstandige ontwikkelpreview staat op `/creature-preview.html#/creatures/pegasus`. Zo kan de reader getest worden terwijl andere chats het websitefundament wijzigen. `pnpm exec tsc -p tsconfig.creature-check.json` controleert alleen dit systeem.
+Anatomie gebruikt title, text, label en optionele focus {x,y} in procenten. Alle huidige entries hebben zes stappen. De atlas gebruikt hetzelfde model met atlas {bounds, center, label, area?, point?}. Bounds en area zijn [west,south,east,north]; center is [longitude,latitude]. Area is een breed cultuurgebied. Point is alleen voor ondersteunde historische plekken, zoals Helikon, Heliopolis of de latere Etna-associatie. Een brede traditie krijgt geen verzonnen oorsprongspin.
 
-## Een nieuw wezen toevoegen
+IntersectionObserver stuurt focuswissels op een pixelgebaseerde leeslijn. Het sticky vlak eindigt met zijn parent. Op smalle/lage schermen staat een illustratie of kaart vóór iedere tekststap. StoryReader laat het volledige proza in de documentflow staan; er is geen intern scrollvlak.
 
-1. Kopieer `src/creatures/pegasus/` naar `src/creatures/<id>/`.
-2. Wijzig `creature.ts`: exportnaam, uniek id, naam, boek (`wonder`, `adventure` of `dark`), korte gegevens, illustraties en bronnen. De TypeScript-interface `Creature` bewaakt het formaat.
-3. Vervang de illustraties. De `new URL('./asset.webp', import.meta.url)`-regels worden door Vite gebundeld. PNG, WebP en SVG zijn bruikbaar; pas die bestandsnamen aan. `cover` mag dezelfde illustratie als `anatomy.image` gebruiken. De URL-vorm laat de catalogus ook in Node-tests werken.
-4. Schrijf `story.md`. De veilige Markdown-renderer ondersteunt paragrafen, koppen van niveau 1–6, nadruk, vet, opsommingen en citaten. HTML wordt als tekst behandeld. Zet `story.file` op `./story.md`.
-5. Importeer het wezen in `src/creatures/index.ts` en voeg het toe aan `creatures`.
+## Verhaal en bronnen
 
-Binnen de creature-ervaring werken het juiste boek, de inhoudsopgave, routes en vorige/volgende navigatie vervolgens automatisch. Anatomie en kaart gebruiken dezelfde `src/creature-book/StickyScroll.tsx`; aantallen stappen zijn dynamisch. Het verhaal wordt automatisch uit de creature-map geladen. Er zijn geen nieuwe pagina's nodig. De layout en de stijlen staan in `src/creature-book/`; CSS is beperkt tot deze ervaring via `@scope`.
+story.md bevat een eigen verhaal met h1-titel en h2-beats. De renderer verlaagt koppen één niveau, zodat de creature-naam de enige h1 is. HTML wordt tekst; Markdown voert geen code uit. Alle verhalen voldoen aan de richtlengten en ieder donker verhaal heeft vier fasen.
 
-Het tegelijk ontwikkelde websitefundament gebruikt `src/content/repository.ts` voor de studeerkamer en boekoverzichten. De adapter `src/creature-book/foundationCatalog.ts` neemt alle geregistreerde folder-creatures automatisch op in die overzichten. Deze vertaalt `adventure` naar de bestaande categorie `thrilling` en `dark` naar `frightening`; de canonieke creature-data blijft de gevraagde boeknamen gebruiken. De bestaande `/wezens/:slug`-route kiest de nieuwe reader voor folder-creatures en behoudt de oude reader voor de andere demonstratiewezen.
+folklore.origin, role en meaning onderscheiden bekende traditie, latere beeldvorm en eigen fictie. sources bevat bronlinks. warning geeft het donkere samenleesmoment. artworkNote documenteert tijdelijke platen in de data zonder implementatietekst in de leesflow.
 
-## Leeservaring
+## Artwork
 
-- Ontmoeting: een rustig geïllustreerd begin, met één uitnodiging om verder te ontdekken.
-- Anatomie en herkomst: sticky illustratie met korte scrollstappen. Klikbare stapindicatoren bieden een alternatief voor scrollen. Op mobiel blijft het beeld kleiner en scrollt de tekst natuurlijk onder de illustratie door. Reduced motion wordt gerespecteerd.
-- Verhaal: ongeveer twee derde illustratie, één derde onafhankelijk scrollbaar leesvlak; ook met toetsenbord te bedienen.
-- Folklore: oorsprong, rol en betekenis; optionele gedachte en bronnen.
-- De boekenknop opent een native modal met focusbeheer, Escape en focusherstel. Onbekende routes hebben een herstelpagina.
+Pegasus behoudt zijn WebP-platen. Draak en Kuchisake-onna gebruiken kopieën van bestaande lokale afbeeldingen in eigen folders. Fenix, Baku, Cycloop, Manticore, Wendigo en Baba Yaga hebben tijdelijke SVG-platen die hun compositie ondersteunen. De Wendigo-plaat toont een verhulde mensvorm zonder gewei of hertenschedel.
 
-Creature-specifieke data, teksten en afbeeldingen blijven in de eigen map. Stabiele ids zijn geschikt voor latere favorieten, voortgang, accounts, audio en taalvarianten. Die functies zijn nog niet gebouwd. Boekthema's veranderen kleuren zonder de structuur te veranderen.
+AtlasMap gebruikt lokale Natural Earth-data met brede 1:110m en geselecteerde 1:50m geometrie. Zie atlas/README.md voor provenance. Vervang artwork met new URL('./asset.webp', import.meta.url).href; Vite bundelt dit voor GitHub Pages.
 
-De Pegasus-vertelling is een nieuwe, vrije bewerking van de Hippokrene-mythe. De kaart is gestileerd, niet op schaal. De UI gebruikt lokaal gebundelde Cormorant Garamond en DM Sans, met systeemfonts als fallback. De illustraties zijn geoptimaliseerd naar WebP; de app hoeft geen externe afbeeldingen op te halen. Zie `creature-illustrations.md` voor de assetpaden en de volledige prompts van de ingebouwde imagegen-tool.
+## Controle
+
+pnpm check valideert typecheck, lint, 20 tests, stories, atlasstappen en build. Negen readers zijn verticaal in beide richtingen getest op vier viewportformaten (36 flows). Fysieke iOS/Safari-controle is niet uitgevoerd.
