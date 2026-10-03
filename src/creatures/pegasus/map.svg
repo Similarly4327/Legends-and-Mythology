@@ -11,8 +11,15 @@
 <path d="m654 240 16-9 24 22-8 29-18-9Z"/><path d="m700 361 19 11-7 35-18-10Z"/><path d="m571 464 16 9-5 14-19-7Z"/><path d="m611 482 11-12 16 11-8 19Z"/><path d="m643 440 10 8-5 18-12-7Z"/><path d="m685 501 11-11 18 10-6 17Z"/><path d="m757 560 26 10 4 24-21-2Z"/>
 </g>
 <g fill="none" stroke="#92734e" opacity=".5"><path d="m318 184 13-19 15 24m-7-7 18-25 16 28m-58 87 17-24 15 23m31 105 15-23 20 23m-36 17 13-19 15 22m-25 87 15-21 17 25"/><path d="M25 25h950v690H25Z M32 32h936v676H32Z"/><path d="M25 60h25V25m925 35h-25V25M25 680h25v35m925-35h-25v35"/></g>
-<g font-family="Georgia, serif" fill="#654a2e"><text x="306" y="314" font-size="24" letter-spacing="5" transform="rotate(-25 306 314)">GRIEKENLAND</text><text x="609" y="368" font-size="19" font-style="italic" letter-spacing="2">Egeïsche</text><text x="636" y="397" font-size="19" font-style="italic" letter-spacing="2">Zee</text><text x="825" y="312" font-size="17" letter-spacing="3" transform="rotate(80 825 312)">KLEIN-AZIË</text><text x="555" y="720" font-size="16" letter-spacing="4">KRETA</text><text x="436" y="477" font-size="14">Helikon</text></g>
-<g transform="translate(431 459)" stroke="#78512d"><circle r="8" fill="#78512d"/><circle r="17" fill="none" stroke-dasharray="2 4"/></g>
-<g transform="translate(880 100)" fill="none" stroke="#78512d"><circle r="35" stroke-width=".7"/><circle r="28" stroke-width=".7"/><path d="M0-40 6-6 40 0 6 6 0 40-6 6-40 0-6-6Z"/><path d="M0-40V0l6-6ZM40 0H0l6 6ZM0 40V0l-6 6ZM-40 0H0l-6-6Z" fill="#78512d"/><path d="m-22-22 22 16 22-16-16 22 16 22-22-16-22 16 16-22Z" stroke-width=".7"/><text y="-42" text-anchor="middle" font-size="15" fill="#78512d" stroke="none" font-family="Georgia">N</text></g>
-<text x="65" y="683" font-family="Georgia" font-style="italic" font-size="14" fill="#785f43">Een kaart uit het onderzoeksboek · gestileerd, niet op schaal</text></g></svg>
+
+
+<g transform="translate(880 100)" fill="none" stroke="#78512d"><circle r="35" stroke-width=".7"/><circle r="28" stroke-width=".7"/><path d="M0-40 6-6 40 0 6 6 0 40-6 6-40 0-6-6Z"/><path d="M0-40V0l6-6ZM40 0H0l6 6ZM0 40V0l-6 6ZM-40 0H0l-6-6Z" fill="#78512d"/><path d="m-22-22 22 16 22-16-16 22 16 22-22-16-22 16 16-22Z" stroke-width=".7"/></g>
+<g fill="none" stroke="#78512d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+<g transform="translate(482 342)"><path d="M0 22 24 4l24 18H0Zm5 5h38M9 27v22m10-22v22m11-22v22m10-22v22M4 50h40"/></g>
+<g transform="translate(591 422)"><path d="M0 19q10-5 20 0t20 0M5 10h31l-6 13H11Z M20 2v8m0-8 8 8"/><path d="M0 29q10-5 20 0t20 0"/></g>
+<g transform="translate(450 350)"><circle r="11"/><path d="M-7 2q7-5 14 0M-5 6q5-3 10 0M0-17c-4 6-5 8 0 10 5-2 4-4 0-10Z"/></g>
+<g transform="translate(431 459)"><circle r="13"/><path d="M-8 3q8-5 16 0M-6 7q6-4 12 0M0-19c-5 7-6 9 0 12 6-3 5-5 0-12Z"/></g>
+<g transform="translate(693 526) rotate(-24)"><path d="M0 0c-8 22-5 40 0 57 5-17 8-35 0-57Zm0 13-8 3m8 7 7 3m-7 7-8 3m8 7 7 3m-7 7-7 3"/></g>
+<g transform="translate(526 140)"><path d="M-25 4q12-10 24 0 13-10 25-1l-8 3 10 6-14 1-8-5-8 5-13-1 8-6Z M-5 5l-7-12 13 7M-4 7 8 1l-5 12"/></g>
+</g></g></svg>
 

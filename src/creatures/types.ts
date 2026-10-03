@@ -1,10 +1,25 @@
 export type BookId = 'wonder' | 'adventure' | 'dark';
 
 export interface DiscoveryStep {
+  id: string;
   title: string;
   text: string;
-  label?: string;
-  focus?: { x: number; y: number };
+}
+
+export interface CreatureStory {
+  id: string;
+  title: string;
+  shortDescription: string;
+  image: string;
+  imageAlt: string;
+  tone: string;
+  sections: { paragraphs: string[] }[];
+}
+
+export interface FolkloreNote {
+  id: string;
+  title: string;
+  text: string;
 }
 
 export interface Creature {
@@ -17,10 +32,10 @@ export interface Creature {
   reading?: { age: string; minutes: number };
   introduction: { title: string; shortText: string; invitation: string };
   cover: string;
-  anatomy: { title: string; image: string; imageAlt: string; facts: DiscoveryStep[] };
-  location: { image: string; imageAlt: string; title: string; steps: DiscoveryStep[] };
-  folklore: { title: string; origin: string; role: string; meaning: string; moral?: string; sources?: { title: string; url: string }[] };
-  story: { file: string; image: string; imageAlt: string; note?: string };
+  anatomy: { title: string; intro: string; image: string; imageAlt: string; facts: DiscoveryStep[]; question: string };
+  location: { image: string; imageAlt: string; title: string; intro: string; steps: DiscoveryStep[]; question: string };
+  folklore: { title: string; intro: string; notes: FolkloreNote[]; closing: string; sources?: { title: string; url: string }[] };
+  stories: CreatureStory[];
 }
 
 export const books: { id: BookId; title: string; subtitle: string; numeral: string }[] = [

@@ -7,6 +7,21 @@ export function validateCreatures(items: Creature[]): Creature[] {
     if (ids.has(item.id)) throw new Error(`Dubbel creature-id: ${item.id}`);
     if (!['wonder', 'adventure', 'dark'].includes(item.book)) throw new Error(`Onbekend boek: ${item.book}`);
     if (!item.anatomy.facts.length || !item.location.steps.length) throw new Error(`Ontdekkingsstappen ontbreken: ${item.id}`);
+    for (const steps of [item.anatomy.facts, item.location.steps]) {
+      const stepIds = new Set<string>();
+      for (const step of steps) {
+        if (!step.id || stepIds.has(step.id)) throw new Error(`Ongeldig of dubbel ontdekpunt in ${item.id}: ${step.id}`);
+        stepIds.add(step.id);
+      }
+    }
+    if (!item.stories.length) throw new Error(`Verhalen ontbreken: ${item.id}`);
+    const storyIds = new Set<string>();
+    for (const story of item.stories) {
+      if (!story.id || storyIds.has(story.id) || !story.title || !story.sections.length || story.sections.some(section => !section.paragraphs.length)) {
+        throw new Error(`Ongeldig of dubbel verhaal in ${item.id}: ${story.id}`);
+      }
+      storyIds.add(story.id);
+    }
     ids.add(item.id);
   }
   return items;

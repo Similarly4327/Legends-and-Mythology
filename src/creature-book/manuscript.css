@@ -70,9 +70,43 @@
   .folklore-notes blockquote { border-block: 3px double var(--line); padding: 20px 0; }
   .contents-dialog { background: var(--paper); border: 5px double var(--accent); }
   .continuous-section { scroll-margin-top: 18px; }
-  .continuous-section .story-reader { height: auto; min-height: 0; grid-template-rows: minmax(300px, 55svh) auto; }
+  .continuous-section .story-reader { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 54%); grid-template-rows: none; align-items: start; gap: 0; height: auto; min-height: 0; margin: 0; }
   .continuous-section .story-reading { overflow: visible; overscroll-behavior: auto; }
-  .continuous-section .story-reading-inner { padding-bottom: 65px; }
+  .continuous-section .story-reading-inner { padding: 18px 8% 65px; }
+  .continuous-section .story-art { position: sticky; top: 20px; height: calc(100svh - 40px); min-height: 0; overflow: visible; padding: 8px 6%; background: var(--paper); }
+  .continuous-section .story-art>img { width: 100%; height: auto; max-height: 76svh; object-fit: contain; }
+  .discovery-intro { max-width: 390px; margin: 10px auto 0; color: var(--muted); font: 20px/1.45 var(--serif); }
+  .illustration-point { position: absolute; transform: translate(-50%, -50%); width: 32px; height: 32px; padding: 0; border: 1px solid var(--accent); border-radius: 50%; background: #f4f1e6cc; box-shadow: 0 2px 12px #30271926; transition: transform .25s, background .25s, box-shadow .25s; }
+  .illustration-point:before { content: ''; position: absolute; inset: 10px; border-radius: 50%; background: var(--accent); }
+  .illustration-point:hover, .illustration-point[data-active="true"] { transform: translate(-50%, -50%) scale(1.12); background: var(--accent); box-shadow: 0 0 0 5px #59664b22; }
+  .illustration-point:hover:before, .illustration-point[data-active="true"]:before { background: var(--paper); }
+  .discovery-step { transform: translateY(14px); transition: opacity .45s ease, transform .55s ease; }
+  .discovery-step.is-active { transform: translateY(0); }
+  .discovery-question { grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start; max-width: 850px; margin: 12px auto 30px; padding: 22px 26px; border-block: 3px double var(--line); color: var(--ink); font: italic 22px/1.45 var(--serif); }
+  .discovery-question svg { margin-top: 5px; color: var(--accent); }
+  .story-title-row { max-width: 790px; margin: 0 auto; padding: 30px 40px 22px; border-bottom: 3px double var(--line); }
+  .story-title { display: inline-flex; align-items: center; gap: 14px; margin-top: 9px; padding: 0; background: transparent; color: var(--ink); font: 500 clamp(34px, 5vw, 58px)/1.05 var(--serif); text-align: left; }
+  .story-title svg { color: var(--accent); transition: transform .25s; }
+  .story-title:hover svg { transform: translateX(5px); }
+  .story-art { overflow: visible; display: flex; flex-direction: column; align-items: center; padding: 18px 18px 0; }
+  .story-art>img { height: auto; max-height: 70svh; object-fit: contain; }
+  .story-art figcaption { padding: 12px 16px; color: var(--muted); font: italic 18px var(--serif); text-align: center; }
+  .story-reading-inner { max-width: 820px; scroll-margin-top: 22px; }
+  .story-scene { display: flex; flex-direction: column; justify-content: center; min-height: 72svh; padding: 28px 0; border-bottom: 1px solid var(--line); opacity: .25; transform: translateY(12px); transition: opacity .45s ease, transform .55s ease; }
+  .story-scene.is-active { opacity: 1; transform: translateY(0); }
+  .story-scene p { margin-bottom: 18px; }
+  .story-scene p:last-child { margin-bottom: 0; }
+  .story-picker { position: fixed; inset: 0; width: min(560px, calc(100% - 40px)); max-height: 85svh; overflow-y: auto; margin: auto; padding: 34px; border: 5px double var(--accent); background: var(--paper); color: var(--ink); box-shadow: 0 25px 90px #20261744; }
+  .story-picker::backdrop { background: #252b2266; backdrop-filter: blur(4px); }
+  .story-picker h2 { margin: 0 35px 20px 0; font-size: 34px; }
+  .story-picker-close { position: absolute; top: 14px; right: 14px; }
+  .story-option { display: grid; grid-template-columns: 92px 1fr auto; gap: 16px; align-items: center; width: 100%; padding: 15px 0; border-top: 1px solid var(--line); background: transparent; text-align: left; }
+  .story-option img { width: 92px; height: 70px; object-fit: cover; }
+  .story-option strong, .story-option small { display: block; }
+  .story-option strong { font: 500 24px/1.1 var(--serif); }
+  .story-option small { margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+  .story-option>svg { color: var(--accent); }
+  .folklore-closing { margin: 32px 0; padding: 22px 0; border-block: 3px double var(--line); font-family: var(--serif) !important; font-style: italic; }
   @media (max-width: 1050px) { .introduction { grid-template-columns: 43% 57%; } .intro-copy h1 { font-size: 72px; } .intro-lead { font-size: 23px; } .discovery-step p { font-size: 21px; } .section-heading h1 { font-size: 35px; } }
   @media (max-width: 759px) {
     main { margin: 14px 4% 0; } main:before, main:after { font-size: 20px; top: -11px; }
@@ -89,9 +123,25 @@
     .focus-marker[data-edge="right"] small { margin-right: 9px; } .focus-marker[data-edge="right"]>span:after { left: auto; right: 10px; }
     .discovery-step { padding: 35px 5%; } .discovery-step h2 { font-size: 34px; } .discovery-step p { font-size: 22px; }
     .chapter-turn .primary-button { font-size: 16px; }
-    .story-art-label { font-size: 17px; padding: 7px 10px; left: 12px; top: 12px; letter-spacing: .2px; }
+    .discovery-intro { max-width: 330px; margin-top: 5px; font-size: 17px; line-height: 1.3; }
+    .illustration-point { width: 29px; height: 29px; }
+    .illustration-point:before { inset: 9px; }
+    .discovery-question { margin: 4px auto 18px; padding: 18px 6%; font-size: 19px; }
+    .story-title-row { padding: 24px 7% 18px; }
+    .story-title-row .eyebrow { font-size: 8px; letter-spacing: 1.2px; }
+    .story-art { padding: 10px 6% 0; }
+    .story-art>img { max-height: 42svh; }
+    .story-art figcaption { font-size: 16px; }
+    .story-picker { padding: 30px 20px; }
+    .story-option { grid-template-columns: 70px 1fr auto; gap: 11px; }
+    .story-option img { width: 70px; height: 62px; }
+    .story-option strong { font-size: 20px; }
     .story-reading-inner { padding: 20px 7% 35px; }
-    .continuous-section .story-reader { grid-template-rows: minmax(240px, 42svh) auto; }
+    .continuous-section .story-reader { grid-template-columns: minmax(0, 1fr); grid-template-rows: 36svh auto; }
+    .continuous-section .story-art { top: 0; height: 36svh; min-height: 230px; padding: 5px 7% 8px; z-index: 4; }
+    .continuous-section .story-art>img { max-height: 30svh; }
+    .continuous-section .story-reading-inner { padding-top: 18px; }
+    .story-scene { min-height: 58svh; }
     .folklore-page { padding: 30px 7%; } .folklore-heading h1 { font-size: 43px; } .folklore-sketch { max-width: 330px; margin: auto; } .folklore-notes p { font-size: 21px; }
   }
 }
