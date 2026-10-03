@@ -1,212 +1,53 @@
 import type { Creature } from '../types';
 const anatomy = new URL('./anatomy-engraving.webp', import.meta.url).href;
+const map = new URL('./map.svg', import.meta.url).href;
 const scene = new URL('./story-scene.webp', import.meta.url).href;
 
 export const pegasus = {
-  "id": "pegasus",
-  "name": "Pegasus",
-  "alternativeName": "Pegasos",
-  "book": "wonder",
-  "tags": ["vleugels","hemel","inspiratie","Griekenland",
-    "Pegasus",
-    "Het oude Griekenland",
-    "Het gevleugelde paard"
-  ],
-  "region": {
-    "name": "Het oude Griekenland",
-    "displayName": "Het oude Griekenland",
-    "tradition": "Oud-Griekse mythologie"
+  id: 'pegasus',
+  name: 'Pegasus',
+  alternativeName: 'Pegasos',
+  tags: ['vleugels', 'hemel', 'inspiratie', 'Griekenland'],
+  book: 'wonder',
+  region: { name: 'Ancient Greece', displayName: 'Het oude Griekenland', tradition: 'Oud-Griekse mythologie' },
+  reading: { age: '6+', minutes: 5 },
+  introduction: {
+    title: 'Het gevleugelde paard',
+    shortText: 'Hoog boven de bergen, waar de wolken de aarde raken, vliegt een paard met vleugels zo licht als de wind.',
+    invitation: 'Ontmoet Pegasus. Een wonderlijk wezen uit het oude Griekenland, en een symbool van grenzeloze verbeelding.',
   },
-  "reading": {
-    "age": "6+",
-    "minutes": 6
+  cover: anatomy,
+  anatomy: {
+    title: 'Van hoef tot vleugelpunt',
+    image: anatomy,
+    imageAlt: 'Pegasus op een Griekse rotsheuvel, getekend met fijne sepia inktlijnen op perkament, met kleine studies van zijn veren en hoofd.',
+    facts: [
+      { title: 'Een paard dat de hemel koos', text: 'Stel je een paard voor dat niet stopt aan de rand van een berg. Pegasus spreidt zijn vleugels en vliegt verder, de wolken tegemoet.', label: 'Een eerste ontmoeting' },
+      { title: 'Vleugels vol verwondering', text: 'Twee grote vleugels, bedekt met zachte veren. In de verhalen dragen ze Pegasus van de aarde naar de wereld van de goden.', label: 'De vleugels', focus: { x: 32, y: 27 } },
+      { title: 'De kracht van een paard', text: 'Onder die wonderlijke vleugels schuilt het lichaam van een krachtig paard. Zijn hoeven kunnen iets bijzonders: op de berg Helikon laten ze een bron ontspringen.', label: 'Het lichaam', focus: { x: 54, y: 58 } },
+      { title: 'Tussen bergen en sterren', text: 'Pegasus hoort thuis in verhalen over hoge bergen en de hemel. Later kreeg ook een sterrenbeeld zijn naam. Misschien vind je hem ooit aan de nachtelijke hemel.', label: 'Zijn wereld', focus: { x: 70, y: 76 } },
+    ],
   },
-  "introduction": {
-    "title": "Het gevleugelde paard",
-    "shortText": "Hoog boven de bergen, waar de wolken de aarde raken, vliegt een paard met vleugels zo licht als de wind.",
-    "invitation": "Volg Eleni naar een bergbron waar een verloren lied een nieuw begin vindt."
+  location: {
+    image: map,
+    imageAlt: 'Een gestileerde kaart van Griekenland en de Egeïsche Zee met de berg Helikon aangegeven.',
+    title: 'Waar het verhaal begon',
+    steps: [
+      { title: 'Het oude Griekenland', text: 'De verhalen over Pegasus komen uit de Griekse mythologie. Een wereld van eilanden, hoge bergen en goden die dicht bij de mensen stonden.', label: 'De oorsprong', focus: { x: 43, y: 47 } },
+      { title: 'Een bron op de berg Helikon', text: 'Op de berg Helikon lag Hippokrene: de paardenbron. Volgens de mythe ontsprong die waar Pegasus met zijn hoef de rots raakte.', label: 'Een bijzondere plek', focus: { x: 43, y: 62 } },
+      { title: 'Een plek voor inspiratie', text: 'Helikon was verbonden met de Muzen, de godinnen van kunst en poëzie. Zo werd ook Pegasus verbonden met de inspiratie die een verhaal tot leven brengt.', label: 'Een spoor van folklore', focus: { x: 43, y: 62 } },
+    ],
   },
-  "cover": anatomy,
-  "anatomy": {
-    "image": anatomy,
-    "title": "Een wezen, stap voor stap",
-    "imageAlt": "Pegasus als sepia gravure op een Griekse rotsheuvel.",
-    "facts": [
-      {
-        "title": "Eerst het paard",
-        "text": "Onder de vleugels herken je een paard: een lange hals, een krachtig lichaam en vier hoeven. De oude teksten geven geen vaste meetbare grootte.",
-        "label": "Eerst het paard",
-        "focus": {
-          "x": 52,
-          "y": 60
-        }
-      },
-      {
-        "title": "Een waakzame kop",
-        "text": "Onze plaat toont een paardengezicht met een rustige blik. Het witte uiterlijk volgt een veelgebruikte beeldtraditie, geen kleurvoorschrift voor alle antieke verhalen.",
-        "label": "Een waakzame kop",
-        "focus": {
-          "x": 65,
-          "y": 36
-        }
-      },
-      {
-        "title": "Veren die de lucht dragen",
-        "text": "Twee gevederde vleugels maken Pegasus anders dan een gewoon paard. In de mythen vliegt hij tussen de wereld van mensen en die van goden.",
-        "label": "Veren die de lucht dragen",
-        "focus": {
-          "x": 32,
-          "y": 27
-        }
-      },
-      {
-        "title": "Een hoef en een bron",
-        "text": "Pausanias verbindt Hippokrene op Helikon met een hoefslag van Pegasus. Het water is een mythologisch spoor, geen biologisch kenmerk.",
-        "label": "Een hoef en een bron",
-        "focus": {
-          "x": 50,
-          "y": 77
-        }
-      },
-      {
-        "title": "Met Bellerophon",
-        "text": "Pegasus draagt Bellerophon tegen de Chimaira. Het gevleugelde paard is dus ook onderdeel van een gevaarlijke heldenreis.",
-        "label": "Met Bellerophon",
-        "focus": {
-          "x": 57,
-          "y": 55
-        }
-      },
-      {
-        "title": "Een spoor aan de hemel",
-        "text": "De naam Pegasus leeft verder in een sterrenbeeld en in kunst over inspiratie. Die latere betekenissen voegen nieuwe lagen toe aan de oude verhalen.",
-        "label": "Een spoor aan de hemel",
-        "focus": {
-          "x": 72,
-          "y": 18
-        }
-      }
-    ]
+  folklore: {
+    title: 'Verhalen die blijven vliegen.',
+    origin: 'Pegasus verschijnt in oude Griekse verhalen. Hij wordt geboren wanneer Perseus Medusa verslaat. Zijn naam duikt al op in de Theogonie van de dichter Hesiodos.',
+    role: 'De held Bellerophon rijdt op Pegasus in zijn strijd met de Chimaira. In andere verhalen draagt het gevleugelde paard de bliksem van Zeus.',
+    meaning: 'Een paard dat kan vliegen: het is een beeld dat blijft verwonderen. Door de eeuwen heen werd Pegasus verbonden met poëzie, inspiratie en de vrijheid van de verbeelding.',
+    moral: 'Verbeelding kan je verder brengen dan je voeten ooit kunnen lopen.',
+    sources: [
+      { title: 'Hesiodos — Theogonie, 270–286', url: 'https://www.theoi.com/Text/HesiodTheogony.html' },
+      { title: 'Pausanias — Beschrijving van Griekenland, 9.31', url: 'https://www.theoi.com/Text/Pausanias9B.html' },
+    ],
   },
-  "location": {
-    "image": anatomy,
-    "title": "Een atlas van de overlevering",
-    "imageAlt": "Herkenbare kustlijnen en culturele context voor Pegasus",
-    "steps": [
-      {
-        "title": "De Griekse verhalenwereld",
-        "text": "Kustlijnen en eilanden plaatsen ons in de oostelijke Middellandse Zee. Hier werd het verhaal verteld, niet één bewezen verblijfplaats van Pegasus.",
-        "label": "Griekse verhalenwereld",
-        "atlas": {
-          "bounds": [
-            -8,
-            24,
-            45,
-            48
-          ],
-          "label": "Griekse verhalenwereld",
-          "center": [
-            23,
-            38
-          ],
-          "area": [
-            19,
-            34,
-            28,
-            42
-          ]
-        }
-      },
-      {
-        "title": "Bergen van Griekenland",
-        "text": "We naderen het vasteland en de Egeïsche Zee. Helikon ligt in Boeotië, ten noordwesten van Athene.",
-        "label": "Boeotië",
-        "atlas": {
-          "bounds": [
-            18,
-            33,
-            29,
-            43
-          ],
-          "label": "Boeotië",
-          "center": [
-            23,
-            38
-          ],
-          "area": [
-            21.5,
-            37.5,
-            24,
-            39
-          ]
-        }
-      },
-      {
-        "title": "Helikon en Hippokrene",
-        "text": "De berg en de paardenbron hebben een concrete plek in de overlevering van Pausanias. De stip markeert de bergcontext; de bron is niet als exact GPS-punt ingetekend.",
-        "label": "Helikon",
-        "atlas": {
-          "bounds": [
-            20,
-            36,
-            25,
-            40
-          ],
-          "label": "Helikon",
-          "center": [
-            22.82,
-            38.35
-          ],
-          "point": true
-        }
-      },
-      {
-        "title": "Een landschap voor de Muzen",
-        "text": "Helikon is verbonden met de Muzen. In ons eigen verhaal wordt het berglandschap een plek om aandachtig te luisteren.",
-        "label": "Helikon en de Muzen",
-        "atlas": {
-          "bounds": [
-            18,
-            33,
-            29,
-            43
-          ],
-          "label": "Helikon en de Muzen",
-          "center": [
-            22.8,
-            38.3
-          ],
-          "area": [
-            21.8,
-            37.8,
-            23.8,
-            39
-          ]
-        }
-      }
-    ]
-  },
-  "folklore": {
-    "title": "Achter de overlevering",
-    "origin": "Pegasus komt voor bij Hesiodos en in verhalen over Bellerophon. Pausanias verbindt zijn hoef met Hippokrene op Helikon.",
-    "role": "Een gevleugeld paard, helper van een held en in sommige teksten drager van Zeus’ bliksem.",
-    "meaning": "Kunstenaars verbonden Pegasus later sterk met poëzie en inspiratie. Eleni en haar zoektocht zijn ons eigen verhaal.",
-    "moral": "Een nieuw lied begint soms met goed luisteren.",
-    "sources": [
-      {
-        "title": "Hesiodos — Theogonie",
-        "url": "https://www.theoi.com/Text/HesiodTheogony.html"
-      },
-      {
-        "title": "Pausanias — Helikon en Hippokrene",
-        "url": "https://www.theoi.com/Text/Pausanias9B.html"
-      }
-    ]
-  },
-  "story": {
-    "file": "./story.md",
-    "image": scene,
-    "imageAlt": "Pegasus bij een bergbron op Helikon.",
-    "note": "Een eigen vertelling voor Legends & Mythology. Personages, gesprekken en gebeurtenissen zijn fictie; folklore en latere beeldtradities worden in de notities apart toegelicht."
-  }
+  story: { file: './story.md', image: scene, imageAlt: 'Pegasus bij een bergbron, tussen groene heuvels en cipressen op de berg Helikon.', note: 'Een vrije vertelling, geïnspireerd op de mythe van Hippokrene.' },
 } satisfies Creature;

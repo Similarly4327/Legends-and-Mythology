@@ -3,12 +3,10 @@ import type { Book } from '../content/types';
 import { BookEmblem } from './BookEmblem';
 import { Icon } from './Icon';
 import styles from './BookObject.module.css';
-import { useBookMotion } from '../hooks/useBookMotion';
 
 export function BookObject({ book }: { book: Book }) {
-  const move = useBookMotion();
   return <article className={styles.book} data-book={book.id}>
-    <Link to={`/boeken/${book.id}`} onClick={event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && event.button === 0) { event.preventDefault(); move(book.id, 'opening'); } }} className={styles.link} aria-label={`Open ${book.title.toLocaleLowerCase('nl')}`}>
+    <Link to={`/boeken/${book.id}`} className={styles.link} aria-label={`Open ${book.title.toLocaleLowerCase('nl')}`}>
       <div className={styles.object} aria-hidden="true">
         <div className={styles.pages} />
         <div className={styles.cover}>

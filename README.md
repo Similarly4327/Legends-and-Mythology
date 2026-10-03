@@ -1,89 +1,176 @@
 # Legends & Mythology
 
-Een geïllustreerd bestiarium met een studeerkamer, drie fysieke boeken en negen volledige vertellingen. Folklore, latere beeldtradities en eigen fictie worden apart toegelicht.
-
-| Boek | Leesvolgorde |
-| --- | --- |
-| Licht / wonder | Pegasus → Fenix → Baku |
-| Bruin / adventure | Draak → Cycloop → Manticore |
-| Zwart / dark | Kuchisake-onna → Wendigo → Baba Yaga |
+Een digitaal, geïllustreerd bestiarium dat voelt als een verzameling onderzoeksboeken. Dit project is de eerste websitefundering: een studeerkamer, drie boeken, inhoudsopgaven en voorbeeldverslagen voor Pegasus, Draak en Kuchisake-onna. De verhalen zijn lokale, redactioneel samengestelde demo-inhoud.
 
 ## Starten
 
-Gebruik Node.js 24+ en pnpm 11.19.0 (vastgelegd in package.json). Installeer pnpm zo nodig via de [officiële instructies](https://pnpm.io/installation).
+Gebruik **Node.js 24+** en **pnpm 11.19.0** (de versie staat in `package.json`). Installeer pnpm via de [officiële installatie-instructies](https://pnpm.io/installation) als het nog niet beschikbaar is.
 
 ```sh
 pnpm install
 pnpm dev
-pnpm check
-pnpm preview
 ```
 
-Vite toont het lokale adres; de native configuratielader gebruikt Node's TypeScript-ondersteuning. `pnpm check` voert typecheck, lint, 20 kernchecks, contentvalidatie en productiebuild uit. `pnpm build` schrijft dist/. Serveer die via HTTP, niet als file://.
+Vite toont het lokale adres, gewoonlijk `http://127.0.0.1:5173/`. Als die poort bezet is, kiest Vite de volgende vrije poort.
 
-## Architectuur en routes
+```sh
+pnpm typecheck  # strict TypeScript
+pnpm lint      # ESLint en React-hooks
+pnpm test      # kernchecks voor content, registratie, routing, Markdown en scrollselectie
+pnpm build     # typecheck, contentvalidatie en productiebuild naar dist/
+pnpm preview   # bekijk de gebouwde website op een lokale webserver
+pnpm check     # alle bovenstaande kwaliteitschecks en de build
+```
 
-React, strict TypeScript en Vite. HashRouter ondersteunt GitHub Pages zonder SPA-404-hack. CSS Modules verzorgen de website; de bestaande CreatureBook gebruikt eigen CSS binnen `@scope (.creature-experience)`. Lettertypen en illustraties staan lokaal. Geen backend, account, betaling of runtime-AI.
+De native Vite-configuratielader gebruikt Node's ingebouwde TypeScript-ondersteuning. Daardoor hoeft de eenvoudige `vite.config.ts` niet eerst via een apart bundelproces te worden geladen. Node 24 is hiervoor de gekozen basis.
 
-Alle publieke creature-routes gebruiken dezelfde bestaande reader en het foldercontract. Draak en Kuchisake-onna zijn naar dat contract overgebracht. De catalogusadapter levert metadata aan de bestaande inhoudsopgaven, geen tweede verhaalmodel. De oudere foundation-readerbestanden blijven als historische implementatie/testfixtures aanwezig, maar zijn niet aan een publieke route gekoppeld. De reader wordt apart geladen om de eerste bundel klein te houden.
+## Stack en architectuur
 
-| Route na # | Inhoud |
+- React + TypeScript, strict, met Vite.
+- React Router met `HashRouter`, zodat directe routes en refresh op statische hosting blijven werken.
+- CSS Modules voor de website en de doorlopende reader. De parallel toegevoegde folder-reader gebruikt eigen CSS binnen `@scope (.creature-experience)`.
+- Semantische CSS-variabelen voor papier, inkt, lijnen, accent en het illustratievlak. `data-theme="wonder|thrilling|frightening"` bepaalt het boekthema.
+- Browser-native IntersectionObserver voor de doorlopende story engine; CSS voor lichte overgangen. Geen animatie- of globale statebibliotheek.
+- Lokaal gebundelde lettertypen: Cormorant Garamond voor de boektypografie, DM Sans voor bediening en kleine notities.
+- Lokale WebP-illustraties. Geen AI-API, backend, account, database of betaling in de app.
+
+De website kiest een helder hoofdstukmodel met een willekeurig aantal hoofdstukken, stappen en visuele staten. Een zwartboek-entry hoeft dus geen anatomie of vier vaste hoofdstukken te hebben. De huidige donkere demo bevat drie atmosferische verhaalstappen en daarna culturele context, zonder expliciete onthulling.
+
+Tijdens de bouw is een apart folder-based creature-systeem toegevoegd. Dat is behouden: Pegasus opent deze reader; Draak en Kuchisake-onna gebruiken de doorlopende foundation-reader. De catalogusadapter maakt beide contentbronnen zichtbaar in dezelfde boekoverzichten. De aanvullende documentatie staat in [docs/creature-system.md](docs/creature-system.md). Het samenbrengen van beide contentmodellen is een geschikte volgende architectuurstap; wijzig de adapter en de presentatie onafhankelijk van elkaar.
+
+## Routes
+
+| Route na `#` | Inhoud |
 | --- | --- |
-| / | Studeerkamer met drie boeken |
-| /boeken/wonder | Lichte inhoudsopgave |
-| /boeken/thrilling | Bruine inhoudsopgave |
-| /boeken/frightening | Zwarte inhoudsopgave |
-| /wezens/:slug | Doorlopend veldverslag |
-| /creatures/:id | Alias voor dezelfde reader |
-| /creatures/:id/:chapter | Hetzelfde document, start bij anatomy, origin, story of folklore |
-| /over | Toelichting op bewerkingen en samen lezen |
+| `/` | De studeerkamer en de drie boeken |
+| `/boeken/wonder` | Het lichte boek |
+| `/boeken/thrilling` | Het bruine boek |
+| `/boeken/frightening` | Het zwarte boek |
+| `/wezens/:slug` | Veldverslag; kiest de passende geregistreerde reader |
+| `/creatures/:id` | Folder-reader, momenteel Pegasus |
+| `/creatures/:id/:chapter` | Folder-hoofdstuk: anatomy, origin, story, folklore |
+| `/over` | Over het bestiarium, bewerkingen en samen lezen |
 
-Een wezen is één document: intro → anatomie → herkomst/atlas → verhaal → folklore. Hoofdstukknoppen scrollen binnen dit document. Oude hoofdstuk-URLs positioneren bij het juiste onderdeel zonder overige onderdelen weg te laten. Het donkere samenleesmoment verschijnt opnieuw bij een ander donker wezen; de leeftijd is een redactionele indicatie.
+Onbekende routes, boeken en creature-slugs krijgen een herstelpagina. `draft` staat niet in de publieke inhoudsopgave. `locked` en `coming-soon` krijgen een herkenbare kaartstatus en openen nog geen reader. Een lege collectie en een zoekopdracht zonder resultaat hebben eigen lege staten. Ontbrekende foundation-illustraties krijgen een papieren placeholder met toegankelijke omschrijving.
 
-## Doorlezen en boekwissels
+## Mappen
 
-StickyScroll begrenst het sticky beeld tot de eigen anatomie-/atlassectie. Tekststappen bepalen de sectiehoogte; na de laatste stap laat het beeld los. IntersectionObserver kijkt naar een pixelgebaseerde leeslijn op 52% van de viewport en herberekent bij resize. Er is geen constante scrollhandler, verticale preventDefault of scroll-lock op de reader-root.
+```text
+.github/workflows/pages.yml      Validatie en Pages-deployment
+public/artwork/                  Verwisselbare website- en demo-illustraties
+src/
+  App.tsx                       Routing en scrollreset bij navigatie
+  components/                   Boekobjecten, kaarten, header, foutstaten
+    reader/                     Header, sticky engine, beelden, kaart, notities
+  pages/                        Landing, inhoudsopgave, reader, over-pagina
+  content/
+    types.ts                    Het foundation-contentcontract
+    books.ts                    De drie collecties
+    creatures/                  Foundation-demo's met hoofdstukken en beeldstaten
+    repository.ts               Catalogus, lookup, zoeken, buren, validatie
+  creatures/                    Folder-content met creature.ts, story.md en artwork
+  creature-book/                Folder-reader en catalogusadapter
+  integrations/contracts.ts     Toekomstige identity/progress/entitlement-adapters
+  lib/                          Assetpaden, scrollselectie, veilige Markdown-parser
+  styles/global.css             Basisregels, tokens, thema's, reduced motion
+scripts/validate-content.ts     Contentcheck tijdens iedere build
+tests/                          Kleine kernchecks
+docs/                           Content- en artworkdocumentatie
+```
 
-Het volledige verhaal staat in de documentflow naast een sticky illustratie. Er is geen intern scrollvlak of overscroll-containment. Onder 760px breed of 560px hoog verschijnen beeld en tekst per stap onder elkaar en wordt de verhaalillustratie statisch. Reduced motion schakelt boekanimaties en soepel scrollen uit.
+## Content toevoegen aan de doorlopende reader
 
-Vorige/volgende wordt uitsluitend uit siblings van hetzelfde boek afgeleid. De inhoudsopgave bevat alleen dat boek. **Sluit boek** toont een korte sluitanimatie en keert terug naar de hut. Daar opent een ander fysiek boek met zijn eigen openanimatie naar de inhoudsopgave. Directe URLs openen vanzelf het juiste thema.
+Maak bijvoorbeeld `src/content/creatures/nieuw-wezen.ts`. Gebruik `satisfies Creature` of een expliciete `Creature`-typeannotatie. Registreer de export in de array van `src/content/repository.ts`. Er hoeft geen nieuwe route of pagina te worden gemaakt.
 
-## Content toevoegen
+```ts
+import type { Creature } from '../types';
 
-1. Kopieer een folder onder src/creatures/. Geef creature.ts een uniek id en gebruik `satisfies Creature` uit src/creatures/types.ts.
-2. Kies book: wonder, adventure of dark. Registreer de export eenmaal in src/creatures/index.ts. De arrayvolgorde bepaalt de leesvolgorde binnen elk boek. De adapter foundationCatalog.ts vertaalt adventure naar thrilling en dark naar frightening voor de bestaande websitecatalogus.
-3. Maak meestal 5–7 korte anatomiestappen. Een optionele focus met procentuele x/y toont één label op de hoofdillustratie.
-4. Geef 3–4 atlasstappen een atlas met bounds `[west,south,east,north]`, center `[longitude,latitude]`, label en eventueel een brede area met dezelfde grensvolgorde. Alleen een brononderbouwde cultuurhistorische plek krijgt point: true. Een regio is geen vermeende woonplaats.
-5. Schrijf een volledig eigen verhaal in story.md: circa 700–1000 woorden voor licht, 900–1300 voor spannend en 1400–2000 voor zwart. De donkere entries gebruiken vier verhaalbeats. De veilige Markdown-renderer ondersteunt koppen, paragrafen, nadruk, lijsten en citaten; HTML blijft tekst.
-6. Voeg bronlinks, variantnotities en een scheiding tussen folklore en eigen fictie toe. Een donker wezen krijgt een eigen warning. artworkNote documenteert een tijdelijke plaat in de data.
+export const nieuwWezen = {
+  id: 'nieuw-wezen',
+  slug: 'nieuw-wezen',
+  name: 'Nieuw wezen',
+  category: 'wonder',
+  region: 'Regio',
+  tradition: 'Culturele traditie',
+  summary: 'Een korte uitnodiging.',
+  status: 'draft',
+  age: '6+',
+  readingMinutes: 3,
+  tags: ['onderwerp'],
+  artwork: {
+    src: 'artwork/nieuw-wezen.webp',
+    alt: 'Beschrijf de betekenisvolle inhoud van de illustratie.',
+    width: 1080,
+    height: 1440,
+  },
+  chapters: [{
+    id: 'ontmoeting',
+    title: 'De eerste ontmoeting',
+    kind: 'discovery',
+    states: [{ id: 'intro', kind: 'illustration', caption: 'Een eerste veldschets' }],
+    steps: [{
+      id: 'eerste-spoor',
+      visualState: 'intro',
+      title: 'Een eerste spoor.',
+      paragraphs: ['De tekst van de eerste stap.'],
+    }],
+  }],
+  sources: [{ title: 'Bron of redactionele notitie', note: 'Wat onderbouwt deze bron?' }],
+  editorialNote: 'Beschrijf welke delen folklore zijn en welke onze eigen bewerking.',
+} satisfies Creature;
+```
 
-De build controleert registratie, atlasgrenzen, aantallen stappen, ontbrekende verhalen en onbedoeld korte teasers. Zie [het creature-contract](docs/creature-system.md).
+Een stap verwijst met `visualState` naar een state binnen hetzelfde hoofdstuk. Meerdere stappen mogen hetzelfde beeld gebruiken. Er zijn beeldtypen `illustration`, `anatomy`, `map`, `traces` en `scene`. Met `artwork` op een state kun je een andere illustratie kiezen; zonder override gebruikt de state het creature-artwork. `annotations` voegen labels met procentuele coördinaten toe. `location` bevat het label en de plek op de schematische verhalenkaart. `treatment` biedt subtiele uitsnedes en afstandssfeer.
 
-## Lokale atlas en artwork
+Een stap kan ook `eyebrow`, `facts` en `note` bevatten. Hoofdstukken zijn geen vier hard-coded URL-pagina's: je mag ze toevoegen, samenvoegen, inkorten of in een andere volgorde plaatsen. Een optionele `warning` toont een leesmoment vóór de foundation-reader. Dat moment wordt alleen binnen de huidige reader-sessie bevestigd en is geen accountontgrendeling of leeftijdscontrole.
 
-AtlasMap gebruikt Natural Earth-geografie: 1:110m voor brede context en 1:50m voor regionale details van Griekenland, Italië, Japan en Egypte. Kustlijnen en meren zijn lokaal tot compacte SVG-padstrings verwerkt. Eén stap toont één focus; brede gebieden krijgen een ellips, ondersteunde plekken een punt. Er is geen externe kaart-API of tracking. [Bron en verwerking](src/creature-book/atlas/README.md).
+De build valideert dubbele ids/slugs, routevriendelijke slugs, publicatiestatus, ontbrekende metadata, hoofdstukken, bronnen, dubbele states, kapotte stateverwijzingen, kaartcontext, annotatieposities en artworkbeschrijvingen. De folder-registratie heeft aanvullende checks in `src/creatures/registry.ts`.
 
-Pegasus behoudt zijn WebP-platen. Draak en Kuchisake-onna gebruiken kopieën van de bestaande beelden in hun eigen folders. De zes nieuwe entries gebruiken tijdelijke lokale SVG-onderzoeksplaten. De Wendigo is een verhulde menselijke schaduw zonder gewei of hertenschedel. Definitief artwork kan per folder worden vervangen via `new URL('./asset.webp', import.meta.url).href`, zonder readerwijziging.
+Voor een creature in het folder-systeem kopieer je `src/creatures/pegasus/` en registreer je het in `src/creatures/index.ts`. Deze worden via `foundationCatalog.ts` automatisch in de websitecatalogus opgenomen. Zie de afzonderlijke creature-documentatie voor het eigen formaat en de veilige `story.md`-ondersteuning.
 
-De hut en historische foundation-assets staan in public/artwork/. [Eerdere imagegen-prompts](docs/artwork-prompts.json) en [Pegasus-assetdocumentatie](docs/creature-illustrations.md) blijven bewaard. Assets worden relatief opgelost; gebruik geen harde /artwork/-paden op projecthosting.
+## Artwork
 
-## Controle
+Foundation-artwork staat in `public/artwork/`: `cabin.webp`, `pegasus.webp`, `draak.webp` en `rain.webp`. Vervang deze bestanden of wijzig de contentverwijzing; houd afmetingen en alt-tekst actueel. De boekomslagen zijn toegankelijke links met een CSS-materiaaloppervlak en losse SVG-folie-emblemen. Je kunt later een echte coverafbeelding invoegen zonder de navigatie te wijzigen.
 
-De negen readers zijn in de browser met gewone paginascroll volledig omlaag en omhoog gecontroleerd op **390×844, 768×1024, 1024×768 en 1440×900**: 36 leesflows zonder vastlopen of horizontale overflow. Ook boekgrenzen, sluiten/openen, hoofdstuk-deeplinks, atlasfocus en sticky release zijn gecontroleerd. Dit zijn Chromium-viewportcontroles; fysieke iOS/Safari-tests zijn niet uitgevoerd.
+Afbeeldingen worden tegen `import.meta.env.BASE_URL` opgelost. Gebundelde folder-assets houden hun door Vite gemaakte URL. Gebruik geen handmatig vastgelegde `/artwork/...`-paden voor projecthosting. Houd toekomstige illustraties op geschikte afmetingen, comprimeer naar WebP/AVIF en reserveer ruimte om layout shift te beperken. Alleen het primaire beeld wordt met hoge prioriteit geladen; overige platen gebruiken lazy loading.
 
-De site heeft semantische secties, een overslaanlink, beschrijvende linknamen, zichtbare focus, lokale alt-teksten en reduced motion. Kernchecks staan in tests/, contentvalidatie in scripts/validate-content.ts. Browserresultaten en screenshots staan lokaal in het genegeerde output/playwright/.
+De tijdelijke foundation-assets zijn gemaakt met de ingebouwde imagegen-tool en geoptimaliseerd naar WebP. De volledige prompts staan in [docs/artwork-prompts.json](docs/artwork-prompts.json); de Pegasus-folderillustraties hebben hun eigen [assetdocumentatie](docs/creature-illustrations.md). Er vindt geen beeld- of verhaalgeneratie plaats tijdens het gebruik van de website.
+
+## Hoe de sticky story engine werkt
+
+`StickyStorySection` tekent een hoofdstuk met twee kolommen. De linkerkolom bevat een sticky canvas met identiek bemeten beeldlagen. Alle tekststappen in de rechterkolom bepalen de lengte van het hoofdstuk; lang verhaalproza verkort het canvas dus niet.
+
+IntersectionObserver kijkt naar een smalle horizontale leeslijn op 36% van de viewporthoogte. Bij een grensovergang leest de component de stapgeometrie en kiest `selectActiveStep` de laatste stap die de lijn is gepasseerd. Dit werkt in beide scrollrichtingen en bij een start midden in een hoofdstuk. De pixelmarges worden bij resize herberekend: verticale procentuele `rootMargin`-waarden worden door de browser op de viewportbreedte gebaseerd en zijn hier daarom ongeschikt.
+
+De canvaspositie verandert niet bij een andere state. Alleen de zichtbaarheidslaag wisselt met een rustige fade. Er is geen permanente scroll-eventlus en geen scrolljacking. De actuele hoofdstuktitel wordt ook in de compacte readernavigatie gemarkeerd.
+
+Op schermen tot 700px breed, of onder 560px hoog, valt de doorlopende reader terug op beeld vóór tekst per stap. Er is dan geen desktop-sticky vlak dat de leesruimte inneemt. De CSS respecteert `prefers-reduced-motion`; programmatisch scrollen respecteert dezelfde voorkeur. De folder-reader heeft een afzonderlijke, kleinere sticky mobiele compositie.
+
+## Toegankelijkheid en controleren
+
+De website heeft semantische secties, beschrijvende linknamen, een focusbare hoofdinhoud, een werkende overslaanlink, zichtbare focus, alt-teksten, benoemde icon-knoppen en een tekstvergrotingsknop in de foundation-reader. Nieuwe illustraties en copy moeten dezelfde zorg krijgen. Essentiële informatie hangt niet alleen van thema-kleur af.
+
+Voor de foundation-reader zijn forward/reverse statewissels, canvaspositie, zoeken, leesmoment, tekstvergroting, back/forward en foutstaten in een Chromium-browser gecontroleerd. De layouts zijn bekeken op 390×844, 768×1024, 1024×768 en 1440×900. Dit zijn viewportcontroles; echte iOS Safari- en touch-devicecontroles blijven een nuttige vervolgstap. Browser-artifacts staan lokaal onder het genegeerde `output/playwright/`.
+
+Controleer na contentuitbreidingen in elk geval een lange tekststap, de hoofdstukovergang, de laatste stap, mobiel zonder horizontale overflow, iPad in beide oriëntaties, toetsenbordbediening en reduced motion.
 
 ## GitHub Pages
 
-De workflow .github/workflows/pages.yml valideert PRs. Een push naar main of een handmatige workflowrun bouwt en deployt naar Pages. De repository staat op GitHub Actions als publicatiebron. Lokale wijzigingen worden pas zichtbaar na commit/push en een geslaagde deployment.
+De workflow in `.github/workflows/pages.yml` valideert pull requests. Een push naar `main` of een handmatige workflowrun bouwt en deployt daarna naar Pages. Deze opdracht bereidt dat voor; er is nog niets gepusht of gepubliceerd.
 
-1. Settings → Pages → Build and deployment → Source: GitHub Actions.
-2. Commit/push inclusief pnpm-lock.yaml naar main.
-3. Controleer Validate and deploy to GitHub Pages in Actions.
-4. Open [de Pages-site](https://similarly4327.github.io/Legends-and-Mythology/).
+1. Zet in de GitHub-repository **Settings → Pages → Build and deployment → Source** op **GitHub Actions**.
+2. Commit en push de projectbestanden inclusief `pnpm-lock.yaml` naar `main`.
+3. Controleer de workflow **Validate and deploy to GitHub Pages** in Actions.
+4. Open het adres dat de deployment geeft. Voor deze repository is het verwachte projectadres `https://Similarly4327.github.io/Legends-and-Mythology/`.
 
-Vite gebruikt base: './'; HashRouter houdt routes na # buiten het serverpad. De gebouwde scripts, fonts en lokale beelden werken daardoor ook onder een projectsubpad. Achtergrond: [Vite deployment](https://vite.dev/guide/static-deploy), [HashRouter](https://reactrouter.com/api/declarative-routers/HashRouter).
+`base: './'` maakt de gebouwde scripts, fonts en public-assets relatief aan de statische index. `HashRouter` houdt bijvoorbeeld `#/boeken/wonder` en `#/wezens/draak` buiten het pad dat de server ontvangt. Een refresh vraagt daarom opnieuw de bestaande project-index op, zonder SPA-404-hack. Dit werkt ook onder een andere projectnaam of op een eigen domein. Serveer `dist/` via HTTP; open de HTML niet direct als `file://`.
+
+Technische achtergrond: [Vite statische deployment](https://vite.dev/guide/static-deploy) en [React Router HashRouter](https://reactrouter.com/api/declarative-routers/HashRouter).
 
 ## Toekomstige integraties
 
-src/integrations/contracts.ts bevat afzonderlijke interfaces voor identity, progress, entitlement en reader preferences. Er is geen storage-adapter aangesloten. Favorieten, voortgang, ouderprofielen en synchronisatie kunnen later via deze interfaces worden toegevoegd. Package-/entitlementmetadata reserveert ruimte voor toekomstige bundels, zonder nu iets te verkopen of ontgrendelen.
+`src/integrations/contracts.ts` bevat grenzen voor `IdentityAdapter`, `ProgressAdapter`, `EntitlementAdapter`, `UserProgress`, `Entitlements` en `ReaderPreferences`. Er is nog geen concrete storage-adapter aangesloten. Favorieten, gelezen wezens, voortgang, ouderprofielen en apparaatsynchronisatie kunnen later achter deze interfaces worden toegevoegd; UI-componenten hoeven zelf geen authenticatie- of databasecode te krijgen.
+
+De foundation-creaturemetadata ondersteunt optionele `packageId` en `entitlementId`. Die reserveren ruimte voor bundels en rechten, maar verkopen of ontsluiten momenteel niets. De zwarteboek-waarschuwing is uitsluitend een samenleesmoment.
+
+Waardevolle volgende iteraties: één contentcontract voor beide readers, redactioneel beoordeelde definitieve illustraties en bronnotities, echte Safari/iPad-controle, opgeslagen leesvoortgang via een losse adapter en herbruikbare printplaten per wezen.

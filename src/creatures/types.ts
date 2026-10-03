@@ -5,16 +5,6 @@ export interface DiscoveryStep {
   text: string;
   label?: string;
   focus?: { x: number; y: number };
-  atlas?: AtlasFocus;
-}
-
-/** Bounds and areas are geographic context, never a claimed monster location. */
-export interface AtlasFocus {
-  bounds: [west: number, south: number, east: number, north: number];
-  label: string;
-  center: [longitude: number, latitude: number];
-  area?: [west: number, south: number, east: number, north: number];
-  point?: boolean;
 }
 
 export interface Creature {
@@ -31,8 +21,6 @@ export interface Creature {
   location: { image: string; imageAlt: string; title: string; steps: DiscoveryStep[] };
   folklore: { title: string; origin: string; role: string; meaning: string; moral?: string; sources?: { title: string; url: string }[] };
   story: { file: string; image: string; imageAlt: string; note?: string };
-  warning?: string;
-  artworkNote?: string;
 }
 
 export const books: { id: BookId; title: string; subtitle: string; numeral: string }[] = [

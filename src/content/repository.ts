@@ -1,9 +1,11 @@
 import { books } from './books';
 import { folderCatalog } from '../creature-book/foundationCatalog';
+import { draak } from './creatures/draak';
+import { kuchisakeOnna } from './creatures/kuchisake-onna';
 import { categories } from './types';
 import type { Category, Creature } from './types';
 
-export const creatures: readonly Creature[] = folderCatalog;
+export const creatures: readonly Creature[] = [...folderCatalog, draak, kuchisakeOnna];
 
 export function isCategory(value: string | undefined): value is Category {
   return categories.some((category) => category === value);
@@ -27,11 +29,9 @@ export function searchCreatures(entries: readonly Creature[], query: string): Cr
     .join(' ').toLocaleLowerCase('nl').includes(normalized));
 }
 
-/** Adjacent published entries within the current volume, with firm boundaries. */
+/** Adjacent published entries across volumes; every destination keeps its own theme/gate. */
 export function getCreatureNeighbors(slug: string, entries = creatures) {
-  const current = entries.find(creature => creature.slug === slug && creature.status === 'available');
-  if (!current) return {};
-  const available = entries.filter((creature) => creature.status === 'available' && creature.category === current.category);
+  const available = entries.filter((creature) => creature.status === 'available');
   const index = available.findIndex((creature) => creature.slug === slug);
   return index < 0 ? {} : { previous: available[index - 1], next: available[index + 1] };
 }

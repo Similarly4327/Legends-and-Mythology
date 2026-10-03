@@ -9,11 +9,9 @@ import { NotFound } from '../components/NotFound';
 import { Icon } from '../components/Icon';
 import { usePageTitle } from '../hooks/usePageTitle';
 import common from '../components/Common.module.css';
-import { useBookMotion } from '../hooks/useBookMotion';
 import styles from './BookOverview.module.css';
 
 export function BookOverview() {
-  const move = useBookMotion();
   const { category } = useParams();
   const book = getBook(category);
   const [query, setQuery] = useState('');
@@ -22,9 +20,9 @@ export function BookOverview() {
   const entries = getBookCreatures(book.id);
   const filtered = searchCreatures(entries, query);
   return <div className={common.paperPage} data-theme={book.id}>
-    <SiteHeader book={book.id} />
+    <SiteHeader />
     <main id="main" tabIndex={-1} className={styles.main}>
-      <Link to="/" onClick={event => { event.preventDefault(); move(book.id, 'closing'); }} className={`${common.textLink} ${styles.back}`}><Icon name="arrow-left" /> Sluit boek · De studeerkamer</Link>
+      <Link to="/" className={`${common.textLink} ${styles.back}`}><Icon name="arrow-left" /> De studeerkamer</Link>
       <section className={styles.heading} aria-labelledby="book-title">
         <div><span className={common.eyebrow}>Boek {book.volume} <span aria-hidden="true">/</span> {book.nickname}</span><h1 id="book-title">{book.shortTitle}<br /><em>wezens.</em></h1><p>{book.description}</p><span className={styles.age}>{book.age} <span aria-hidden="true">·</span> {book.mood}</span></div>
         <div className={styles.seal} aria-hidden="true"><BookEmblem kind={book.emblem} /><span>VOLUME {book.volume}</span></div>
@@ -36,8 +34,8 @@ export function BookOverview() {
         <div className={styles.cards} data-multiple={filtered.length > 1}>{filtered.map((creature, index) => <CreatureCard key={creature.id} creature={creature} index={index} compact={filtered.length > 1} />)}</div>
         {filtered.length === 0 && <div className={styles.empty}><Icon name="feather" /><h2>{entries.length ? 'Geen spoor gevonden.' : 'De eerste bladzijde wacht nog.'}</h2><p>{entries.length ? 'Probeer een andere naam, regio of een ander onderwerp.' : 'De onderzoeker werkt aan nieuwe veldverslagen voor dit boek.'}</p>{query && <button className={common.button} onClick={() => setQuery('')}>Toon alle veldverslagen</button>}</div>}
       </section>
-      <div className={styles.endnote}><span aria-hidden="true">✧</span><p>De verzameling groeit. Elk nieuw verhaal krijgt zijn eigen plek in het boek.</p><Link to="/" className={common.textLink}>Sluit boek en kies in de studeerkamer <Icon name="arrow-right" /></Link></div>
+      <div className={styles.endnote}><span aria-hidden="true">✧</span><p>De verzameling groeit. Elk nieuw verhaal krijgt zijn eigen plek in het boek.</p><Link to="/" className={common.textLink}>Ontdek ook de andere boeken <Icon name="arrow-right" /></Link></div>
     </main>
-    <SiteFooter book={book.id} />
+    <SiteFooter />
   </div>;
 }
