@@ -36,14 +36,14 @@ function Contents({ close, current }: { close: () => void; current: Creature }) 
 function Introduction({ creature }: { creature: Creature }) {
   return <section className="introduction"><div className="intro-copy"><div className="specimen-label"><span /> MYTHOLOGISCHE WEZENS <span /></div>
     <h1>{creature.name}</h1><div className="intro-subtitle">{creature.introduction.title}</div><Ornament /><p className="intro-lead">{creature.introduction.shortText}</p><p className="intro-description">{creature.introduction.invitation}</p>
-    <Link className="primary-button" to={pathFor(creature, 'anatomy')}>Ontdek {creature.name}<Icon name="arrow" size={19} /></Link><div className="origin-tag"><Icon name="map" size={17} /><span>{creature.region.displayName}</span><i /><span>Mythologie</span></div></div>
+    <a className="primary-button" href="#anatomy">Ontdek {creature.name}<Icon name="arrow" size={19} /></a><div className="origin-tag"><Icon name="map" size={17} /><span>{creature.region.displayName}</span><i /><span>Mythologie</span></div></div>
     <figure className="intro-art"><div className="art-number">FIG. {String(creatures.indexOf(creature) + 1).padStart(2, '0')}</div><img src={creature.cover} alt={creature.anatomy.imageAlt} fetchPriority="high" /><figcaption><span className="caption-line" />{creature.introduction.title}<span className="caption-line" /></figcaption><Ornament compass /></figure>
-    <div className="intro-bottom"><span><Icon name="feather" size={16} />Een veldgids voor nieuwsgierige zielen</span><Link to={pathFor(creature, 'anatomy')}>Het avontuur begint hier <span>↓</span></Link></div></section>;
+    <div className="intro-bottom"><span><Icon name="feather" size={16} />Een veldgids voor nieuwsgierige zielen</span><a href="#anatomy">Het avontuur begint hier <span>↓</span></a></div></section>;
 }
 
 function StoryReader({ creature }: { creature: Creature }) {
   return <section className="story-reader" aria-label={`Het verhaal van ${creature.name}`}><div className="story-art"><img src={creature.story.image} alt={creature.story.imageAlt} /><div className="story-art-label"><Icon name="story" size={17} />HET VERHAAL VAN {creature.name.toLocaleUpperCase('nl')}</div></div>
-    <div className="story-reading" tabIndex={0} role="region" aria-label="Verhaaltekst, zelfstandig scrollbaar"><div className="story-reading-inner"><Markdown source={getCreatureStory(creature.id, creature.story.file)} />{creature.story.note && <p className="story-note">{creature.story.note}</p>}<div className="story-end"><Icon name="spark" /><Link to={pathFor(creature, 'folklore')}>Ontdek de folklore <Icon name="arrow" size={17} /></Link></div></div></div></section>;
+    <div className="story-reading"><div className="story-reading-inner"><Markdown source={getCreatureStory(creature.id, creature.story.file)} />{creature.story.note && <p className="story-note">{creature.story.note}</p>}<div className="story-end"><Icon name="spark" /><a href="#folklore">Ontdek de folklore <Icon name="arrow" size={17} /></a></div></div></div></section>;
 }
 
 function Folklore({ creature }: { creature: Creature }) {
@@ -55,26 +55,38 @@ export function CreatureBook() {
   const { id, slug, chapter = '' } = useParams();
   const creature = creatures.find(item => item.id === (id ?? slug));
   const [contentsOpen, setContentsOpen] = useState(false);
+  const [activeChapter, setActiveChapter] = useState(chapter);
   const location = useLocation();
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [location.pathname]);
+  useEffect(() => {
+    const sections = chapters.map(item => document.getElementById(item.id || 'introduction')).filter((item): item is HTMLElement => !!item);
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (visible) setActiveChapter(visible.target.id === 'introduction' ? '' : visible.target.id);
+    }, { rootMargin: '-18% 0px -68% 0px', threshold: 0 });
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, [creature]);
+  useEffect(() => {
+    const target = chapter ? document.getElementById(chapter) : null;
+    if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname, chapter]);
   useEffect(() => { if (creature) document.title = `${creature.name} — Legends & Mythology`; }, [creature]);
   if (!creature || !chapters.some(item => item.id === chapter)) return <div className="creature-experience"><div className="not-found"><Icon name="book" size={44} /><span className="eyebrow">EEN ONBEKENDE BLADZIJDE</span><h1>Dit verhaal is nog niet gevonden.</h1><Link to="/" className="primary-button">Open het boek <Icon name="arrow" /></Link></div></div>;
   const book = books.find(item => item.id === creature.book)!;
-  const chapterIndex = chapters.findIndex(item => item.id === chapter);
   const neighbors = creatureNeighbors(creatures, creature);
-  return <div className="creature-experience"><div className={`book-shell theme-${creature.book} ${chapter === 'story' ? 'reading-mode' : ''}`}>
+  return <div className="creature-experience"><div className={`book-shell theme-${creature.book}`}>
     <header className="site-header"><Link to="/" className="brand" aria-label="Legends and Mythology, beginpagina"><Icon name="book" size={29} /><span>Legends <i>&</i> Mythology<small>EEN WERELD VOL VERHALEN</small></span></Link><div className="header-book"><Icon name="sun" size={16} />{book.title}</div><button className="contents-button" onClick={() => setContentsOpen(true)}><Icon name="book" size={18} /><span>De boeken</span><span className="tiny-arrow">↗</span></button></header>
     <div className="book-topline"><button onClick={() => setContentsOpen(true)} className="back-to-book">← <span>{book.title}</span></button><span className="creature-index">WEZEN {String(bookCreatures(creatures, creature.book).indexOf(creature) + 1).padStart(2, '0')} <span>/</span> {creature.name.toUpperCase()}</span><span className="book-edition">EEN GEÏLLUSTREERD ONDERZOEKSBOEK</span></div>
-    <nav className="chapter-nav" aria-label="Hoofdstukken">{chapters.map(item => <Link key={item.id} to={pathFor(creature, item.id)} className={chapter === item.id ? 'selected' : ''} aria-current={chapter === item.id ? 'page' : undefined}><Icon name={item.icon} size={18} /><span>{item.label}</span><small>{item.number}</small></Link>)}</nav>
-    <main id="main" tabIndex={-1} key={`${creature.id}-${chapter}`}>
-      {chapter === '' && <Introduction creature={creature} />}
-      {chapter === 'anatomy' && <StickyScroll image={creature.anatomy.image} imageAlt={creature.anatomy.imageAlt} title={creature.anatomy.title} eyebrow={`${creature.name} · ANATOMIE`} steps={creature.anatomy.facts} />}
-      {chapter === 'origin' && <StickyScroll image={creature.location.image} imageAlt={creature.location.imageAlt} title={creature.location.title} eyebrow={`${creature.name} · HERKOMST`} steps={creature.location.steps} variant="map" />}
-      {chapter === 'story' && <StoryReader creature={creature} />}
-      {chapter === 'folklore' && <Folklore creature={creature} />}
+    <nav className="chapter-nav" aria-label="Hoofdstukken">{chapters.map(item => { const sectionId = item.id || 'introduction'; return <a key={sectionId} href={`#${sectionId}`} className={activeChapter === item.id ? 'selected' : ''} aria-current={activeChapter === item.id ? 'location' : undefined}><Icon name={item.icon} size={18} /><span>{item.label}</span><small>{item.number}</small></a>; })}</nav>
+    <main id="main" tabIndex={-1}>
+      <div id="introduction" className="continuous-section"><Introduction creature={creature} /></div>
+      <div id="anatomy" className="continuous-section"><StickyScroll image={creature.anatomy.image} imageAlt={creature.anatomy.imageAlt} title={creature.anatomy.title} eyebrow={`${creature.name} · ANATOMIE`} steps={creature.anatomy.facts} /></div>
+      <div id="origin" className="continuous-section"><StickyScroll image={creature.location.image} imageAlt={creature.location.imageAlt} title={creature.location.title} eyebrow={`${creature.name} · HERKOMST`} steps={creature.location.steps} variant="map" /></div>
+      <div id="story" className="continuous-section"><StoryReader creature={creature} /></div>
+      <div id="folklore" className="continuous-section"><Folklore creature={creature} /></div>
     </main>
-    {chapter !== '' && chapter !== 'story' && <div className="chapter-turn"><Link to={pathFor(creature, chapters[chapterIndex - 1].id)}>← {chapters[chapterIndex - 1].label}</Link>{chapters[chapterIndex + 1] ? <Link className="primary-button" to={pathFor(creature, chapters[chapterIndex + 1].id)}>{chapters[chapterIndex + 1].label}<Icon name="arrow" size={18} /></Link> : neighbors.next ? <Link className="primary-button" to={pathFor(neighbors.next)}>Ontmoet {neighbors.next.name}<Icon name="arrow" size={18} /></Link> : <button className="primary-button" onClick={() => setContentsOpen(true)}>Terug naar de boeken<Icon name="book" size={18} /></button>}</div>}
-    <footer className="site-footer"><span>Legends & Mythology</span><span>Blijf nieuwsgierig. Er is altijd een volgend verhaal.</span><span>{neighbors.previous && <Link to={pathFor(neighbors.previous)}>← {neighbors.previous.name}</Link>} {book.numeral} — {chapters[chapterIndex].number} {neighbors.next && <Link to={pathFor(neighbors.next)}>{neighbors.next.name} →</Link>}</span></footer>
+    <footer className="site-footer"><span>Legends & Mythology</span><span>Blijf nieuwsgierig. Er is altijd een volgend verhaal.</span><span>{neighbors.previous && <Link to={pathFor(neighbors.previous)}>← {neighbors.previous.name}</Link>} {book.numeral} — {chapters.find(item => item.id === activeChapter)?.number ?? chapters[0].number} {neighbors.next && <Link to={pathFor(neighbors.next)}>{neighbors.next.name} →</Link>}</span></footer>
     {contentsOpen && <Contents current={creature} close={() => setContentsOpen(false)} />}
   </div></div>;
 }

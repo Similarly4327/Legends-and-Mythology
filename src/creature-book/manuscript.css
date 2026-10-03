@@ -69,6 +69,10 @@
   .folklore-notes article:first-child p:first-letter { float: left; font-size: 60px; line-height: .85; padding: 7px 6px 0 0; }
   .folklore-notes blockquote { border-block: 3px double var(--line); padding: 20px 0; }
   .contents-dialog { background: var(--paper); border: 5px double var(--accent); }
+  .continuous-section { scroll-margin-top: 18px; }
+  .continuous-section .story-reader { height: auto; min-height: 0; grid-template-rows: minmax(300px, 55svh) auto; }
+  .continuous-section .story-reading { overflow: visible; overscroll-behavior: auto; }
+  .continuous-section .story-reading-inner { padding-bottom: 65px; }
   @media (max-width: 1050px) { .introduction { grid-template-columns: 43% 57%; } .intro-copy h1 { font-size: 72px; } .intro-lead { font-size: 23px; } .discovery-step p { font-size: 21px; } .section-heading h1 { font-size: 35px; } }
   @media (max-width: 759px) {
     main { margin: 14px 4% 0; } main:before, main:after { font-size: 20px; top: -11px; }
@@ -85,9 +89,9 @@
     .focus-marker[data-edge="right"] small { margin-right: 9px; } .focus-marker[data-edge="right"]>span:after { left: auto; right: 10px; }
     .discovery-step { padding: 35px 5%; } .discovery-step h2 { font-size: 34px; } .discovery-step p { font-size: 22px; }
     .chapter-turn .primary-button { font-size: 16px; }
-    .reading-mode main { margin: 8px 3% 0; } .reading-mode .story-reader { height: calc(100svh - 145px); }
     .story-art-label { font-size: 17px; padding: 7px 10px; left: 12px; top: 12px; letter-spacing: .2px; }
     .story-reading-inner { padding: 20px 7% 35px; }
+    .continuous-section .story-reader { grid-template-rows: minmax(240px, 42svh) auto; }
     .folklore-page { padding: 30px 7%; } .folklore-heading h1 { font-size: 43px; } .folklore-sketch { max-width: 330px; margin: auto; } .folklore-notes p { font-size: 21px; }
   }
 }
